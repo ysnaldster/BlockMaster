@@ -1,4 +1,0 @@
-# Block Master
-
-## Introduction
-## Themes
