@@ -1,3 +1,6 @@
+using Autofac;
+using BlockMaster.Api.Util;
+
 namespace BlockMaster.Api;
 
 public class Startup
@@ -12,6 +15,17 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllers();
+        services.AddCors(o => o.AddPolicy("AllowCorsPolicy", builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        }));
+    }
+
+    public void ConfigureContainer(ContainerBuilder builder)
+    {
+        builder.BuilderContext(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,10 +44,11 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapGet("/", async context =>
-            {
-                await context.Response.WriteAsync("Welcome to running ASP.NET Core on AWS Lambda");
-            });
+            endpoints.MapGet("/",
+                async context =>
+                {
+                    await context.Response.WriteAsync("Welcome to running ASP.NET Core on AWS Lambda");
+                });
         });
     }
 }
