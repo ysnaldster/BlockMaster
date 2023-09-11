@@ -1,5 +1,5 @@
 using BlockMaster.Business.Services;
-using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
@@ -15,9 +15,9 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Movie movie)
+    public async Task<IActionResult> Post([FromBody] MovieRequest movieRequest)
     {
-        var response = await _movieService.Create(movie);
+        var response = await _movieService.Create(movieRequest);
         return Ok(response);
     }
 
@@ -35,17 +35,19 @@ public class MoviesController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Put([FromBody] Movie movie)
+    [HttpPut("{movieName}")]
+    public async Task<IActionResult> Put(string movieName, [FromBody] MovieRequest movieRequest)
     {
-        var response = await _movieService.Update(movie);
+        var response = await _movieService.Update(movieName, movieRequest);
+
         return Ok(response);
     }
 
-    [HttpPut("{movieName}")]
+    [HttpDelete("{movieName}")]
     public async Task<IActionResult> Delete(string movieName)
     {
         var response = await _movieService.Delete(movieName);
+
         return Ok(response);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Request;
 using BlockMaster.Infrastructure.Repositories;
 
 namespace BlockMaster.Business.Services;
@@ -18,27 +19,36 @@ public class MovieService
         _movieRepository = movieRepository;
     }
 
-    public async Task<Movie> Create(Movie movie)
+    public async Task<Movie> Create(MovieRequest movieRequest)
     {
-        var response = await _movieRepository.CreateAsync(movie);
+        var movieId = await GenerateSequenceId();
+        var request = new Movie(movieId, movieRequest);
+        var response = await _movieRepository.CreateAsync(request);
+
         return response;
     }
 
     public async Task<List<Movie>> FindAll()
     {
         var response = await _movieRepository.FindAsync();
+
         return response;
     }
 
     public async Task<List<Movie>> FindByName(string movieName)
     {
         var response = await _movieRepository.FindAsync(movieName);
+
         return response;
     }
 
-    public async Task<Movie> Update(Movie movie)
+    public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
-        var response = await _movieRepository.UpdateAsync(movie);
+        //Validate When Exist > 0 (Movies) && Exception Not Found || Conflict > 1
+        var movie = (await _movieRepository.FindAsync(movieName)).Single();
+        var request = new Movie(movie.Id, movieRequest);
+        var response = await _movieRepository.UpdateAsync(request);
+
         return response;
     }
 
@@ -49,7 +59,20 @@ public class MovieService
             Name = movieName
         };
         var response = await _movieRepository.DeleteAsync(movieToDelete);
+
         return response;
+    }
+
+    #endregion
+
+    #region private methods
+
+    private async Task<long> GenerateSequenceId()
+    {
+        var movies = await _movieRepository.FindAsync();
+        var actualMovieId = movies.MaxBy(movieItem => movieItem.Id)!.Id++;
+
+        return actualMovieId + 1;
     }
 
     #endregion
