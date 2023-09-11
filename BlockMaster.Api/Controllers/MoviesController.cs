@@ -32,7 +32,6 @@ public class MoviesController : ControllerBase
     public async Task<IActionResult> Get(string movieName)
     {
         var response = await _movieService.FindByName(movieName);
-
         return Ok(response);
     }
 
