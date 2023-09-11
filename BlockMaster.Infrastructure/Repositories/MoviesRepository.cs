@@ -41,6 +41,7 @@ public class MoviesRepository
     public async Task<List<Movie>> FindAsync(string movieName = null!)
     {
         var response = await MovieHelper.ScanAsync(_moviesTable!, movieName);
+
         return response;
     }
 
@@ -48,6 +49,7 @@ public class MoviesRepository
     {
         var movieToDictionary = ParseMovieToDocument(movie);
         await _moviesTable!.UpdateItemAsync(movieToDictionary);
+
         return movie;
     }
 
@@ -96,6 +98,7 @@ public class MoviesRepository
             ["Score"] = movie.Score,
             ["Category"] = movie.Category,
         };
+
         return movieToDocument;
     }
 

@@ -32,8 +32,10 @@ public static class MovieHelper
                         Id = long.Parse(movieToDictionary["Id"].N),
                         Name = movieToDictionary["Name"].S,
                         Description = movieToDictionary["Description"].S,
-                        Score = long.Parse(movieToDictionary["Score"].S),
-                        Category = movieToDictionary.TryGetValue("Category", out var category) ? category.S : null
+                        Score = double.Parse(movieToDictionary["Score"].S),
+                        Category = movieToDictionary.TryGetValue("Category", out var category)
+                            ? category.S
+                            : null
                     }));
             }
         } while (!search.IsDone);
