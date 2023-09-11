@@ -29,9 +29,26 @@ public class MovieService
         var response = await _movieRepository.FindAsync();
         return response;
     }
+
     public async Task<List<Movie>> FindByName(string movieName)
     {
         var response = await _movieRepository.FindAsync(movieName);
+        return response;
+    }
+
+    public async Task<Movie> Update(Movie movie)
+    {
+        var response = await _movieRepository.UpdateAsync(movie);
+        return response;
+    }
+
+    public async Task<Movie> Delete(string movieName)
+    {
+        var movieToDelete = new Movie()
+        {
+            Name = movieName
+        };
+        var response = await _movieRepository.DeleteAsync(movieToDelete);
         return response;
     }
 
