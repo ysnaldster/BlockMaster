@@ -18,7 +18,7 @@ public static class IoCServiceCollection
     public static ContainerBuilder BuilderContext(this ContainerBuilder builder, IConfiguration configuration)
     {
         builder.RegisterModule(new ClientsModule());
-        builder.RegisterModule(new RepositoriesModule());
+        builder.RegisterModule(new RepositoriesModule(configuration));
         builder.RegisterModule(new ServicesModule());
         return builder;
     }

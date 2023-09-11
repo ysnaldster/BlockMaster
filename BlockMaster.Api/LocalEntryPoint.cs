@@ -4,6 +4,8 @@ namespace BlockMaster.Api;
 
 public class LocalEntryPoint
 {
+    #region public methods
+
     public static void Main(string[] args)
     {
         CreateHostBuilder(args).Build().Run();
@@ -25,4 +27,6 @@ public class LocalEntryPoint
                     });
                 webBuilder.UseStartup<Startup>();
             });
+
+    #endregion
 }

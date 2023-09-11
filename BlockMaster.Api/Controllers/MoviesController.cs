@@ -1,13 +1,37 @@
+using BlockMaster.Business.Services;
+using BlockMaster.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class MoviesController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get()
+    private readonly MovieService _movieService;
+
+    public MoviesController(MovieService movieService)
     {
-        return Ok("HelloWord");
+        _movieService = movieService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] Movie movie)
+    {
+        var response = await _movieService.Create(movie);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var response = await _movieService.FindAll();
+        return Ok(response);
+    }
+
+    [HttpGet("{movieName}")]
+    public async Task<IActionResult> Get(string movieName)
+    {
+        var response = await _movieService.FindByName(movieName);
+        return Ok(response);
     }
 }

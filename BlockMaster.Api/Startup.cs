@@ -5,6 +5,8 @@ namespace BlockMaster.Api;
 
 public class Startup
 {
+    #region public methods
+
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
@@ -51,4 +53,6 @@ public class Startup
                 });
         });
     }
+
+    #endregion
 }
