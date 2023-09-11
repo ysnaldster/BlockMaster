@@ -1,4 +1,5 @@
 ﻿using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Request;
 using BlockMaster.Infrastructure.Repositories;
 
 namespace BlockMaster.Business.Services;
@@ -18,9 +19,12 @@ public class MovieService
         _movieRepository = movieRepository;
     }
 
-    public async Task<Movie> Create(Movie movie)
+    public async Task<Movie> Create(MovieRequest movieRequest)
     {
-        var response = await _movieRepository.CreateAsync(movie);
+        var movies = await _movieRepository.FindAsync();
+        var movieId = movies.MaxBy(movieItem => movieItem.Id)!.Id;
+        var request = new Movie(movieId, movieRequest);
+        var response = await _movieRepository.CreateAsync(request);
         return response;
     }
 
@@ -36,9 +40,12 @@ public class MovieService
         return response;
     }
 
-    public async Task<Movie> Update(Movie movie)
+    public async Task<Movie> Update(MovieRequest movieRequest)
     {
-        var response = await _movieRepository.UpdateAsync(movie);
+        //Validate When Exist > 0 (Movies) && Exception Not Found || Conflict > 1
+        var movie = (await _movieRepository.FindAsync(movieRequest.Name!)).Single();
+        var request = new Movie(movie.Id, movieRequest);
+        var response = await _movieRepository.UpdateAsync(request);
         return response;
     }
 
