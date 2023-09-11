@@ -34,4 +34,18 @@ public class MoviesController : ControllerBase
         var response = await _movieService.FindByName(movieName);
         return Ok(response);
     }
+
+    [HttpPut]
+    public async Task<IActionResult> Put([FromBody] Movie movie)
+    {
+        var response = await _movieService.Update(movie);
+        return Ok(response);
+    }
+
+    [HttpPut("{movieName}")]
+    public async Task<IActionResult> Delete(string movieName)
+    {
+        var response = await _movieService.Delete(movieName);
+        return Ok(response);
+    }
 }

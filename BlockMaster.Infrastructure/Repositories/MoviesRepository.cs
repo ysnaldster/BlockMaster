@@ -31,7 +31,7 @@ public class MoviesRepository
         var request = new PutItemRequest()
         {
             TableName = _moviesTableName,
-            Item = CreateMovieStructure(movie)
+            Item = ParseMovieToDictionary(movie)
         };
         var response = await _amazonDynamoDb!.PutItemAsync(request);
 
@@ -44,11 +44,35 @@ public class MoviesRepository
         return response;
     }
 
+    public async Task<Movie> UpdateAsync(Movie movie)
+    {
+        var movieToDictionary = ParseMovieToDocument(movie);
+        await _moviesTable!.UpdateItemAsync(movieToDictionary);
+        return movie;
+    }
+
+    public async Task<Movie> DeleteAsync(Movie movie)
+    {
+        var scanFilter = new ScanFilter();
+        scanFilter.AddCondition("Name", ScanOperator.Equal, movie.Name);
+        var scanOperation = new ScanOperationConfig()
+        {
+            Filter = scanFilter
+        };
+        var search = _moviesTable!.Scan(scanOperation);
+        var itemToDelete = (await search.GetRemainingAsync()).Single();
+        var batchWrite = _moviesTable.CreateBatchWrite();
+        batchWrite.AddItemToDelete(itemToDelete);
+        var result = batchWrite.ExecuteAsync();
+
+        return result!.IsCompletedSuccessfully ? throw new Exception() : movie;
+    }
+
     #endregion
 
     #region private methods
 
-    private static Dictionary<string, AttributeValue> CreateMovieStructure(Movie movie)
+    private static Dictionary<string, AttributeValue> ParseMovieToDictionary(Movie movie)
     {
         var movieToDictionary = new Dictionary<string, AttributeValue>()
         {
@@ -60,6 +84,19 @@ public class MoviesRepository
         };
 
         return movieToDictionary;
+    }
+
+    private static Document ParseMovieToDocument(Movie movie)
+    {
+        var movieToDocument = new Document()
+        {
+            ["Id"] = movie.Id,
+            ["Name"] = movie.Name,
+            ["Description"] = movie.Description,
+            ["Score"] = movie.Score,
+            ["Category"] = movie.Category,
+        };
+        return movieToDocument;
     }
 
     #endregion
