@@ -1,4 +1,5 @@
 using Autofac;
+using BlockMaster.Api.Middleware;
 using BlockMaster.Api.Util;
 
 namespace BlockMaster.Api;
@@ -42,7 +43,9 @@ public class Startup
         app.UseRouting();
 
         app.UseAuthorization();
-
+        
+        app.UseMiddleware<ExceptionMiddleware>();
+        
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
