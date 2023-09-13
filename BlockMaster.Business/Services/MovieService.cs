@@ -1,5 +1,7 @@
 ﻿using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Exceptions.NotFoundException;
 using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Util;
 using BlockMaster.Infrastructure.Repositories;
 
 namespace BlockMaster.Business.Services;
@@ -31,6 +33,10 @@ public class MovieService
     public async Task<List<Movie>> FindAll()
     {
         var response = await _movieRepository.FindAsync();
+        if (!response.Any())
+        {
+            throw new MovieNotFoundException(ExceptionUtil.MoviesNotFoundExceptionMessage);
+        }
 
         return response;
     }
@@ -38,15 +44,23 @@ public class MovieService
     public async Task<List<Movie>> FindByName(string movieName)
     {
         var response = await _movieRepository.FindAsync(movieName);
+        if (!response.Any())
+        {
+            throw new MovieNotFoundException(ExceptionUtil.MovieNotFoundExceptionMessage);
+        }
 
         return response;
     }
 
     public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
-        //Validate When Exist > 0 (Movies) && Exception Not Found || Conflict > 1
-        var movie = (await _movieRepository.FindAsync(movieName)).Single();
-        var request = new Movie(movie.Id, movieRequest);
+        var movies = await _movieRepository.FindAsync(movieName);
+        if (!movies.Any())
+        {
+            throw new MovieNotFoundException(ExceptionUtil.MovieNotFoundExceptionMessage);
+        }
+
+        var request = new Movie(movies.Single().Id, movieRequest);
         var response = await _movieRepository.UpdateAsync(request);
 
         return response;

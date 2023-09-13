@@ -3,7 +3,10 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Util;
 using BlockMaster.Infrastructure.Helpers;
+using Serilog;
+using Exception = System.Exception;
 
 namespace BlockMaster.Infrastructure.Repositories;
 
@@ -35,22 +38,40 @@ public class MoviesRepository
         };
         var response = await _amazonDynamoDb!.PutItemAsync(request);
 
-        return response.HttpStatusCode == HttpStatusCode.OK ? movie : throw new Exception();
+        return response.HttpStatusCode == HttpStatusCode.OK
+            ? movie
+            : throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
     }
 
     public async Task<List<Movie>> FindAsync(string movieName = null!)
     {
-        var response = await MovieHelper.ScanAsync(_moviesTable!, movieName);
+        try
+        {
+            var response = await MovieHelper.ScanAsync(_moviesTable!, movieName);
 
-        return response;
+            return response;
+        }
+        catch (Exception e)
+        {
+            Log.Error($"{e.Message}-{e.StackTrace}");
+            throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+        }
     }
 
     public async Task<Movie> UpdateAsync(Movie movie)
     {
-        var movieToDictionary = ParseMovieToDocument(movie);
-        await _moviesTable!.UpdateItemAsync(movieToDictionary);
+        try
+        {
+            var movieToDictionary = ParseMovieToDocument(movie);
+            await _moviesTable!.UpdateItemAsync(movieToDictionary);
 
-        return movie;
+            return movie;
+        }
+        catch (Exception e)
+        {
+            Log.Error($"{e.Message}-{e.StackTrace}");
+            throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+        }
     }
 
     public async Task<Movie> DeleteAsync(Movie movie)
@@ -67,7 +88,9 @@ public class MoviesRepository
         batchWrite.AddItemToDelete(itemToDelete);
         var result = batchWrite.ExecuteAsync();
 
-        return result!.IsCompletedSuccessfully ? throw new Exception() : movie;
+        return result.IsCompletedSuccessfully
+            ? movie
+            : throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
     }
 
     #endregion
