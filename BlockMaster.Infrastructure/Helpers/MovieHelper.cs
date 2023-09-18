@@ -31,6 +31,7 @@ public static class MovieHelper
                     {
                         Id = long.Parse(movieToDictionary["Id"].N),
                         Name = movieToDictionary["Name"].S,
+                        Country = movieToDictionary["Country"].S,
                         Description = movieToDictionary["Description"].S,
                         Score = double.Parse(movieToDictionary["Score"].S),
                         Category = movieToDictionary.TryGetValue("Category", out var category)
