@@ -2,6 +2,7 @@
 using Amazon;
 using Amazon.DynamoDBv2;
 using Autofac;
+using BlockMaster.Infrastructure.Clients;
 
 namespace BlockMaster.Api.Util.Modules;
 
@@ -15,6 +16,10 @@ public class ClientsModule : Module
         builder
             .Register((_, _) => new AmazonDynamoDBClient(RegionEndpoint.USEast1))
             .As<IAmazonDynamoDB>()
+            .SingleInstance();
+        builder
+            .Register((_, _) => new ElastiCacheClient("localhost:6379"))
+            .As<ElastiCacheClient>()
             .SingleInstance();
     }
 

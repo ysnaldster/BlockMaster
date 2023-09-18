@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 using BlockMaster.Domain.Exceptions.BadRequestException;
+using BlockMaster.Domain.Exceptions.ConflictException;
 using BlockMaster.Domain.Exceptions.NotFoundException;
 using Serilog;
 
@@ -39,6 +40,10 @@ public class ExceptionMiddleware
         catch (UnauthorizedAccessException e)
         {
             await CustomHelperException(httpContext, HttpStatusCode.Unauthorized, e);
+        }
+        catch (ConflictGeneralException e)
+        {
+            await CustomHelperException(httpContext, HttpStatusCode.Conflict, e);
         }
         catch (Exception e)
         {

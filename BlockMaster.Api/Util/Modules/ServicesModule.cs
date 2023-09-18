@@ -13,7 +13,8 @@ public class ServicesModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder
-            .Register((context, _) => new MovieService(context.Resolve<MoviesRepository>()))
+            .Register((context, _) => new MovieService(context.Resolve<MoviesRepository>(), 
+                context.Resolve<CacheRepository>()))
             .As<MovieService>()
             .SingleInstance();
     }
