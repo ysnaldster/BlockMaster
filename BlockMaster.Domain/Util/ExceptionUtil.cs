@@ -6,5 +6,6 @@ public abstract class ExceptionUtil
         InternalServerErrorMessage = "Action could not be executed",
         MovieNotFoundExceptionMessage = "The movie does not exist",
         MoviesNotFoundExceptionMessage = "No movies found",
-        MoviesConflictAlreadyExistMessage = "the movie already exists";
+        MoviesConflictAlreadyExistMessage = "the movie already exists",
+        MovieRequestBadRequestMessage = "Movie request does not meet the requirements";
 }

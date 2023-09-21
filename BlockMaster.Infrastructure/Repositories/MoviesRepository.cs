@@ -103,6 +103,7 @@ public class MoviesRepository
         {
             { "Id", new AttributeValue { N = movie.Id.ToString() } },
             { "Name", new AttributeValue { S = movie.Name } },
+            { "Country", new AttributeValue { S = movie.Country } },
             { "Description", new AttributeValue { S = movie.Description } },
             { "Score", new AttributeValue { S = movie.Score.ToString() } },
             { "Category", new AttributeValue { S = movie.Category } }
