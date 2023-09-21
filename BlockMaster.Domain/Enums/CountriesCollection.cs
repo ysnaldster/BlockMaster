@@ -9,8 +9,8 @@ public abstract class CountriesCollection
 
     public enum CountriesPrefix
     {
-        Co,
-        Pe,
-        Cl
+        Co = 57,
+        Pe = 51,
+        Cl = 56
     }
 }
