@@ -1,6 +1,6 @@
 ﻿namespace BlockMaster.Domain.Enums;
 
-public abstract class CountriesCollection
+public static class CountriesCollection
 {
     public const string
         Chile = "Chile",
@@ -9,8 +9,8 @@ public abstract class CountriesCollection
 
     public enum CountriesPrefix
     {
-        Co,
-        Pe,
-        Cl
+        Co = 57,
+        Pe = 51,
+        Cl = 56
     }
 }

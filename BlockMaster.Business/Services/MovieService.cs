@@ -1,4 +1,6 @@
-﻿using BlockMaster.Domain.Entities;
+﻿using BlockMaster.Business.Util;
+using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Exceptions.ConflictException;
 using BlockMaster.Domain.Exceptions.NotFoundException;
 using BlockMaster.Domain.Request;
@@ -26,8 +28,11 @@ public class MovieService
 
     public async Task<Movie> Create(MovieRequest movieRequest)
     {
+        ValidateMovieRequest(movieRequest);
         var movieId = await GenerateSequenceId();
         var request = new Movie(movieId, movieRequest);
+        var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
+        request.Country = countryName;
         var isRequestInCache = await _cacheRepository.FindMovieHash(request.Name!);
         if (isRequestInCache == null)
         {
@@ -76,12 +81,15 @@ public class MovieService
     public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
         var movies = await _movieRepository.FindAsync(movieName);
+        ValidateMovieRequest(movieRequest);
         if (!movies.Any())
         {
             throw new MovieNotFoundException(ExceptionUtil.MovieNotFoundExceptionMessage);
         }
 
         var request = new Movie(movies.Single().Id, movieRequest);
+        var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
+        request.Country = countryName;
         var response = await _movieRepository.UpdateAsync(request);
 
         return response;
@@ -101,6 +109,16 @@ public class MovieService
     #endregion
 
     #region private methods
+
+    private static void ValidateMovieRequest(MovieRequest movieRequest)
+    {
+        var movieRequestValidator = new MovieRequestValidator();
+        var validate = movieRequestValidator.Validate(movieRequest).IsValid;
+        if (!validate)
+        {
+            throw new MovieRequestBadRequestException(ExceptionUtil.MovieRequestBadRequestMessage);
+        }
+    }
 
     private async Task<long> GenerateSequenceId()
     {
