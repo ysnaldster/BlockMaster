@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using BlockMaster.Domain.Enums;
 using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Request;
