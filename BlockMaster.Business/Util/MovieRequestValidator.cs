@@ -1,4 +1,8 @@
-﻿using BlockMaster.Domain.Request;
+using System.Globalization;
+using BlockMaster.Domain.Enums;
+using BlockMaster.Domain.Exceptions.BadRequestException;
+using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Util;
 using FluentValidation;
 
 namespace BlockMaster.Business.Util;
@@ -7,12 +11,27 @@ public class MovieRequestValidator : AbstractValidator<MovieRequest>
 {
     public MovieRequestValidator()
     {
+        const string pattern = "^[a-zA-Z0-9]+(?:\\s[a-zA-Z0-9]+)*$";
         RuleFor(movie => movie.Name)
-            .NotEmpty().WithMessage("El nombre de la película no puede estar vacío.")
-            .Matches($"^[a-zA-Z0-9]+(?:\\s[a-zA-Z0-9]+)*$")
-            .MaximumLength(30).WithMessage("El nombre de la película debe tener como máximo 30 caracteres.")
-            .WithMessage("El nombre de la película solo puede contener letras, números y espacios.");
+            .NotEmpty()
+            .Matches(pattern)
+            .MaximumLength(30);
         RuleFor(movie => movie.Score)
-            .InclusiveBetween(0, 5).WithMessage("El valor no puede exceder de 5.");
+            .InclusiveBetween(0, 5);
+        RuleFor(movie => movie.Category)
+            .Must(category => ValidateMovieCategory(category!));
+    }
+
+    private static bool ValidateMovieCategory(string categoryInput)
+    {
+        var categoryParseToPascal =
+            CultureInfo.CurrentCulture.TextInfo.ToTitleCase(categoryInput?.ToLower() ?? string.Empty);
+        var validate = Enum.TryParse<CategoriesCollection.MovieCategory>(categoryParseToPascal, out _);
+        if (validate)
+        {
+            return validate;
+        }
+
+        throw new MovieRequestCategoryBadRequestException(ExceptionUtil.MovieRequestCategoryBadRequestMessage);
     }
 }

@@ -1,4 +1,4 @@
-﻿using BlockMaster.Business.Util;
+using BlockMaster.Business.Util;
 using BlockMaster.Domain.Entities;
 using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Exceptions.ConflictException;
@@ -81,7 +81,6 @@ public class MovieService
     public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
         var movies = await _movieRepository.FindAsync(movieName);
-
         ValidateMovieRequest(movieRequest);
         if (!movies.Any())
         {
@@ -94,16 +93,6 @@ public class MovieService
         var response = await _movieRepository.UpdateAsync(request);
 
         return response;
-    }
-
-    private static void ValidateMovieRequest(MovieRequest movieRequest)
-    {
-        var movieRequestValidator = new MovieRequestValidator();
-        var validate = movieRequestValidator.Validate(movieRequest).IsValid;
-        if (!validate)
-        {
-            throw new MovieRequestBadRequestException(ExceptionUtil.MovieRequestBadRequestMessage);
-        }
     }
 
     public async Task<Movie> Delete(string movieName)
@@ -120,6 +109,16 @@ public class MovieService
     #endregion
 
     #region private methods
+
+    private static void ValidateMovieRequest(MovieRequest movieRequest)
+    {
+        var movieRequestValidator = new MovieRequestValidator();
+        var validate = movieRequestValidator.Validate(movieRequest).IsValid;
+        if (!validate)
+        {
+            throw new MovieRequestBadRequestException(ExceptionUtil.MovieRequestBadRequestMessage);
+        }
+    }
 
     private async Task<long> GenerateSequenceId()
     {

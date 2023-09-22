@@ -1,4 +1,4 @@
-﻿namespace BlockMaster.Domain.Util;
+namespace BlockMaster.Domain.Util;
 
 public abstract class ExceptionUtil
 {
@@ -7,5 +7,6 @@ public abstract class ExceptionUtil
         MovieNotFoundExceptionMessage = "The movie does not exist",
         MoviesNotFoundExceptionMessage = "No movies found",
         MoviesConflictAlreadyExistMessage = "the movie already exists",
-        MovieRequestBadRequestMessage = "Movie request does not meet the requirements";
+        MovieRequestBadRequestMessage = "Movie request does not meet the requirements",
+        MovieRequestCategoryBadRequestMessage = "The inserted category does not correspond to the allowed ones.";
 }
