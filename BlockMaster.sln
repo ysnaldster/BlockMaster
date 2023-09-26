@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockMaster.CDKApplication"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockMaster.Api", "BlockMaster.Api\BlockMaster.Api.csproj", "{30B28FE3-711C-42ED-97AA-787B0EF88951}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockMaster.Tests", "BlockMaster.Tests\BlockMaster.Tests.csproj", "{E96006AF-7F50-4CA7-8E54-2642345E1D85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{30B28FE3-711C-42ED-97AA-787B0EF88951}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30B28FE3-711C-42ED-97AA-787B0EF88951}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30B28FE3-711C-42ED-97AA-787B0EF88951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E96006AF-7F50-4CA7-8E54-2642345E1D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E96006AF-7F50-4CA7-8E54-2642345E1D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E96006AF-7F50-4CA7-8E54-2642345E1D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E96006AF-7F50-4CA7-8E54-2642345E1D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

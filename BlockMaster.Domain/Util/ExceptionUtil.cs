@@ -1,6 +1,6 @@
 ﻿namespace BlockMaster.Domain.Util;
 
-public abstract class ExceptionUtil
+public static class ExceptionUtil
 {
     public const string
         InternalServerErrorMessage = "Action could not be executed",
