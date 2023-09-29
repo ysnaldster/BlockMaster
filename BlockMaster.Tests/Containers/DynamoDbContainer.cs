@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
+using BlockMaster.Tests.Configuration;
 using Testcontainers.LocalStack;
 using Xunit;
 
@@ -23,16 +24,27 @@ public class DynamoDbContainer : IAsyncLifetime
     {
         await _dynamoDbBuilder.StartAsync()
             .ConfigureAwait(false);
-        var config = new AmazonDynamoDBConfig
-        {
-            RegionEndpoint = RegionEndpoint.USEast1,
-            ServiceURL = "http://localhost:4566"
-        };
+        await ConfigureLocalStackContainer();
     }
 
     public async Task DisposeAsync()
     {
         await _dynamoDbBuilder.StopAsync();
+    }
+    
+    public async Task PopulateDynamoDb()
+    {
+        await LocalDynamoDbConfiguration.PopulateDynamoDb();
+    }
+
+    #endregion
+
+    #region private methods
+
+    private static async Task ConfigureLocalStackContainer()
+    {
+        await LocalSystemManagerConfiguration.ConfigureParameterStore();
+        await LocalDynamoDbConfiguration.ConfigureDynamoDb();
     }
 
     #endregion
