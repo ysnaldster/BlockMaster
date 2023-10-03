@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace BlockMaster.Tests.Features
+namespace BlockMaster.Tests.Features.Controller
 {
     using TechTalk.SpecFlow;
     using System;
@@ -28,7 +28,7 @@ namespace BlockMaster.Tests.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "UnitTest1.feature"
+#line 1 "BlockMasterFindMovie.feature"
 #line hidden
         
         public TestTestFeature(TestTestFeature.FixtureData fixtureData, BlockMaster_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
@@ -40,7 +40,7 @@ namespace BlockMaster.Tests.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "TestTest", "Enable and disable account IP Validation", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Controller", "TestTest", "Enable and disable account IP Validation", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         

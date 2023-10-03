@@ -39,9 +39,9 @@ public class MovieService
         return response;
     }
 
-    public static async Task<List<Movie>> FindAll()
+    public async Task<List<Movie>> FindAll()
     {
-        var response = await MoviesRepository.FindAsync();
+        var response = await _movieRepository.FindAsync();
         if (!response.Any())
         {
             throw new MovieNotFoundException(ConstUtil.MoviesNotFoundExceptionMessage);
@@ -56,7 +56,7 @@ public class MovieService
         var movie = await _cacheRepository.FindMovieHash(movieName);
         if (movie == null)
         {
-            moviesMatches = await MoviesRepository.FindAsync(movieName);
+            moviesMatches = await _movieRepository.FindAsync(movieName);
             if (!moviesMatches.Any())
             {
                 throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
@@ -72,9 +72,9 @@ public class MovieService
         return moviesMatches;
     }
 
-    public static async Task<Movie> Update(string movieName, MovieRequest movieRequest)
+    public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
-        var movies = await MoviesRepository.FindAsync(movieName);
+        var movies = await _movieRepository.FindAsync(movieName);
         ValidateMovieRequest(movieRequest);
         if (!movies.Any())
         {
@@ -84,18 +84,18 @@ public class MovieService
         var request = new Movie(movies.Single().Id, movieRequest);
         var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
         request.Country = countryName;
-        var response = await MoviesRepository.UpdateAsync(request);
+        var response = await _movieRepository.UpdateAsync(request);
 
         return response;
     }
 
-    public static async Task<Movie> Delete(string movieName)
+    public async Task<Movie> Delete(string movieName)
     {
         var movieToDelete = new Movie()
         {
             Name = movieName
         };
-        var response = await MoviesRepository.DeleteAsync(movieToDelete);
+        var response = await _movieRepository.DeleteAsync(movieToDelete);
 
         return response;
     }
@@ -110,17 +110,17 @@ public class MovieService
         }
     }
 
-    private static async Task<long> GenerateSequenceId()
+    private async Task<long> GenerateSequenceId()
     {
-        var movies = await MoviesRepository.FindAsync();
+        var movies = await _movieRepository.FindAsync();
         var actualMovieId = movies.MaxBy(movieItem => movieItem.Id)!.Id++;
 
         return actualMovieId + 1;
     }
 
-    private static async Task ValidateIfMovieExist(string movieName)
+    private async Task ValidateIfMovieExist(string movieName)
     {
-        var moviesMatches = await MoviesRepository.FindAsync(movieName);
+        var moviesMatches = await _movieRepository.FindAsync(movieName);
         if (moviesMatches.Any())
         {
             throw new MovieConflictException(ConstUtil.MoviesConflictAlreadyExistMessage);

@@ -27,7 +27,7 @@ public class MoviesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var response = await MovieService.FindAll();
+        var response = await _movieService.FindAll();
         return Ok(response);
     }
 
@@ -41,7 +41,7 @@ public class MoviesController : ControllerBase
     [HttpPut("{movieName}")]
     public async Task<IActionResult> Put(string movieName, [FromBody] MovieRequest movieRequest)
     {
-        var response = await MovieService.Update(movieName, movieRequest);
+        var response = await _movieService.Update(movieName, movieRequest);
 
         return Ok(response);
     }
@@ -49,7 +49,7 @@ public class MoviesController : ControllerBase
     [HttpDelete("{movieName}")]
     public async Task<IActionResult> Delete(string movieName)
     {
-        var response = await MovieService.Delete(movieName);
+        var response = await _movieService.Delete(movieName);
 
         return Ok(response);
     }
