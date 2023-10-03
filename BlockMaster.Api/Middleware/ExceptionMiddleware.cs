@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Text.Json;
 using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Exceptions.ConflictException;
@@ -7,16 +8,11 @@ using Serilog;
 
 namespace BlockMaster.Api.Middleware;
 
+[ExcludeFromCodeCoverage]
 public class ExceptionMiddleware
 {
-    #region private attributes
-
     private readonly RequestDelegate _requestDelegate;
     private const string ContentType = "application/json";
-
-    #endregion
-
-    #region public methods
 
     public ExceptionMiddleware(RequestDelegate requestDelegate)
     {
@@ -51,10 +47,6 @@ public class ExceptionMiddleware
         }
     }
 
-    #endregion
-
-    #region private methods
-
     private static async Task CustomHelperException(HttpContext context, HttpStatusCode statusCode, Exception e)
     {
         Log.Error($"\nSomething went wrong, Message: {e.Message} \n Exception: {e.StackTrace} \n");
@@ -76,6 +68,4 @@ public class ExceptionMiddleware
 
         return context.Response.WriteAsync(JsonSerializer.Serialize(exception));
     }
-
-    #endregion
 }

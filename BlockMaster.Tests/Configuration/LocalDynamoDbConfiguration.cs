@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
+using BlockMaster.Domain.Entities;
 using BlockMaster.Tests.Util;
-using DynamoConverter;
+using Newtonsoft.Json;
 
 namespace BlockMaster.Tests.Configuration;
 
-public class LocalDynamoDbConfiguration
+public static class LocalDynamoDbConfiguration
 {
-    #region attributes
-
     private static readonly AmazonDynamoDBConfig DynamoConfig = new()
     {
         RegionEndpoint = RegionEndpoint.GetBySystemName(ConstUtil.AwsRegion),
@@ -23,10 +22,6 @@ public class LocalDynamoDbConfiguration
     private static readonly AmazonDynamoDBClient DynamoDbClient =
         new(ConstUtil.AwsAccessKey, ConstUtil.AwsSecretAccessKey, DynamoConfig);
 
-    #endregion
-
-    #region public methods
-
     public static async Task ConfigureDynamoDb()
     {
         await CreateTable();
@@ -34,28 +29,8 @@ public class LocalDynamoDbConfiguration
 
     public static async Task PopulateDynamoDb()
     {
-        foreach (var request in MoviesUtil.CreateMovieRecords()
-                     .Select(movieItem => new
-                     {
-                         movieItem.Id,
-                         movieItem.Name,
-                         movieItem.Description,
-                         movieItem.Country,
-                         movieItem.Score,
-                         movieItem.Category
-                     }).Select(movieBody => new PutItemRequest()
-                     {
-                         TableName = ConstUtil.MovieTableName,
-                         Item = DynamoConvert.SerializeObject(movieBody)
-                     }))
-        {
-            await DynamoDbClient!.PutItemAsync(request);
-        }
+        await InsertMovie("../../../Util/JsonFiles/GetMovie.json");
     }
-
-    #endregion
-
-    #region private methods
 
     private static async Task CreateTable()
     {
@@ -91,6 +66,27 @@ public class LocalDynamoDbConfiguration
         };
     }
 
+    private static async Task InsertMovie(string path)
+    {
+        var table = Table.LoadTable(DynamoDbClient, ConstUtil.MovieTableName);
+        using var stream = new StreamReader(path);
+        var json = await stream.ReadToEndAsync();
+        var movieObject = JsonConvert.DeserializeObject<Movie>(json);
+
+        var movieObjectToStructure = new
+        {
+            movieObject.Id,
+            movieObject.Name,
+            movieObject.Description,
+            movieObject.Country,
+            Score = movieObject.Score.ToString(),
+            movieObject.Category
+        };
+        var movieSerialize = JsonConvert.SerializeObject(movieObjectToStructure);
+
+        await table.PutItemAsync(Document.FromJson(movieSerialize));
+    }
+
     private static async Task<bool> TableAlreadyExists(string tableName)
     {
         var request = new ListTablesRequest
@@ -102,6 +98,4 @@ public class LocalDynamoDbConfiguration
 
         return tables.TableNames.Contains(tableName);
     }
-
-    #endregion
 }

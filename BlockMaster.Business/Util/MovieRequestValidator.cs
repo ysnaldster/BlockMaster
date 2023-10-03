@@ -32,6 +32,6 @@ public class MovieRequestValidator : AbstractValidator<MovieRequest>
             return validate;
         }
 
-        throw new MovieRequestCategoryBadRequestException(ExceptionUtil.MovieRequestCategoryBadRequestMessage);
+        throw new MovieRequestCategoryBadRequestException(ConstUtil.MovieRequestCategoryBadRequestMessage);
     }
 }

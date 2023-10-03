@@ -7,7 +7,6 @@ public static class CountryEvaluator
 {
     public static string ConvertCountryCodeToCountryName(long countryName)
     {
-        //Convert to PascalCase
         var countryNameToString = countryName.ToString();
         var countryToParse =
             CultureInfo.CurrentCulture.TextInfo.ToTitleCase(countryNameToString?.ToLower() ?? string.Empty);

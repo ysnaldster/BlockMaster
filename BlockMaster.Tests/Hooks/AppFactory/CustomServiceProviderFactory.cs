@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace BlockMaster.Tests.Hooks.AppFactory;
 
+[ExcludeFromCodeCoverage]
 public class CustomServiceProviderFactory : IServiceProviderFactory<ContainerBuilder>
 {
     private readonly AutofacServiceProviderFactory
@@ -17,9 +19,8 @@ public class CustomServiceProviderFactory : IServiceProviderFactory<ContainerBui
     public ContainerBuilder CreateBuilder(IServiceCollection services)
     {
         _services = services;
-        return
-            _wrapped.CreateBuilder(
-                services);
+        
+        return _wrapped.CreateBuilder(services);
     }
 
     public IServiceProvider CreateServiceProvider(ContainerBuilder containerBuilder)
@@ -28,17 +29,13 @@ public class CustomServiceProviderFactory : IServiceProviderFactory<ContainerBui
             _services.BuildServiceProvider();
         var configureContainerFilters = serviceProvider
             .GetRequiredService<
-                IEnumerable<
-                    IStartupConfigureContainerFilter<
-                        ContainerBuilder>>>();
+                IEnumerable<IStartupConfigureContainerFilter<ContainerBuilder>>>();
 
         foreach (var filter in configureContainerFilters)
         {
             filter.ConfigureContainer(_ => { })(containerBuilder);
         }
 
-        return
-            _wrapped.CreateServiceProvider(
-                containerBuilder);
+        return _wrapped.CreateServiceProvider(containerBuilder);
     }
 }

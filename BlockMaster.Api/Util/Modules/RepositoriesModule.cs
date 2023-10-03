@@ -9,23 +9,12 @@ namespace BlockMaster.Api.Util.Modules;
 [ExcludeFromCodeCoverage]
 public class RepositoriesModule : Module
 {
-    #region private attributes
-
     private readonly IConfiguration _configuration;
-
-    #endregion
-
-    #region public methods
 
     public RepositoriesModule(IConfiguration configuration)
     {
         _configuration = configuration;
     }
-
-    #endregion
-
-
-    #region protected methods
 
     protected override void Load(ContainerBuilder builder)
     {
@@ -40,6 +29,4 @@ public class RepositoriesModule : Module
             .As<CacheRepository>()
             .SingleInstance();
     }
-
-    #endregion
 }

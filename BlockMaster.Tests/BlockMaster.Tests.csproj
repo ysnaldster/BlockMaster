@@ -27,12 +27,17 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Steps\" />
+      <ProjectReference Include="..\BlockMaster.Api\BlockMaster.Api.csproj" />
+      <ProjectReference Include="..\BlockMaster.Infrastructure\BlockMaster.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BlockMaster.Api\BlockMaster.Api.csproj" />
-      <ProjectReference Include="..\BlockMaster.Infrastructure\BlockMaster.Infrastructure.csproj" />
+      <Compile Update="Features\Controller\BlockMasterFindMovie.feature.cs">
+        <DependentUpon>UnitTest1.feature</DependentUpon>
+        <AutoGen>true</AutoGen>
+        <DesignTime>true</DesignTime>
+        <Visible>true</Visible>
+      </Compile>
     </ItemGroup>
 
 </Project>

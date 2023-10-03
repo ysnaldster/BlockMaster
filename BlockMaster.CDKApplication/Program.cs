@@ -8,8 +8,6 @@ namespace BlockMaster.CDKApplication;
 [ExcludeFromCodeCoverage]
 public static class Program
 {
-    #region private methods
-
     public static void Main(string[] args)
     {
         var app = new App();
@@ -28,6 +26,4 @@ public static class Program
         }, blockMasterStackProps);
         app.Synth();
     }
-
-    #endregion
 }

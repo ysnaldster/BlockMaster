@@ -1,6 +1,6 @@
 ﻿namespace BlockMaster.Tests.Util;
 
-public class ConstUtil
+public static class ConstUtil
 {
     public const string
         AwsRegion = "us-east-1",

@@ -4,14 +4,8 @@ namespace BlockMaster.Infrastructure.Clients;
 
 public class ElastiCacheClient
 {
-    #region private attributes
-
     private const int DefaultDatabase = 0;
     private readonly IDatabase _database;
-
-    #endregion
-
-    #region public methods
 
     public ElastiCacheClient(string endpoint)
     {
@@ -23,6 +17,4 @@ public class ElastiCacheClient
     {
         return _database;
     }
-
-    #endregion
 }

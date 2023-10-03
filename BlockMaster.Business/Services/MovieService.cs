@@ -11,15 +11,9 @@ namespace BlockMaster.Business.Services;
 
 public class MovieService
 {
-    #region private attributes
-
     private readonly MoviesRepository _movieRepository;
     private readonly CacheRepository _cacheRepository;
-
-    #endregion
-
-    #region public methods
-
+    
     public MovieService(MoviesRepository movieRepository, CacheRepository cacheRepository)
     {
         _movieRepository = movieRepository;
@@ -45,12 +39,12 @@ public class MovieService
         return response;
     }
 
-    public async Task<List<Movie>> FindAll()
+    public static async Task<List<Movie>> FindAll()
     {
-        var response = await _movieRepository.FindAsync();
+        var response = await MoviesRepository.FindAsync();
         if (!response.Any())
         {
-            throw new MovieNotFoundException(ExceptionUtil.MoviesNotFoundExceptionMessage);
+            throw new MovieNotFoundException(ConstUtil.MoviesNotFoundExceptionMessage);
         }
 
         return response;
@@ -62,10 +56,10 @@ public class MovieService
         var movie = await _cacheRepository.FindMovieHash(movieName);
         if (movie == null)
         {
-            moviesMatches = await _movieRepository.FindAsync(movieName);
+            moviesMatches = await MoviesRepository.FindAsync(movieName);
             if (!moviesMatches.Any())
             {
-                throw new MovieNotFoundException(ExceptionUtil.MovieNotFoundExceptionMessage);
+                throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
             }
 
             await _cacheRepository.CreateMovieHash(moviesMatches.Single());
@@ -78,64 +72,58 @@ public class MovieService
         return moviesMatches;
     }
 
-    public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
+    public static async Task<Movie> Update(string movieName, MovieRequest movieRequest)
     {
-        var movies = await _movieRepository.FindAsync(movieName);
+        var movies = await MoviesRepository.FindAsync(movieName);
         ValidateMovieRequest(movieRequest);
         if (!movies.Any())
         {
-            throw new MovieNotFoundException(ExceptionUtil.MovieNotFoundExceptionMessage);
+            throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
         }
 
         var request = new Movie(movies.Single().Id, movieRequest);
         var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
         request.Country = countryName;
-        var response = await _movieRepository.UpdateAsync(request);
+        var response = await MoviesRepository.UpdateAsync(request);
 
         return response;
     }
 
-    public async Task<Movie> Delete(string movieName)
+    public static async Task<Movie> Delete(string movieName)
     {
         var movieToDelete = new Movie()
         {
             Name = movieName
         };
-        var response = await _movieRepository.DeleteAsync(movieToDelete);
+        var response = await MoviesRepository.DeleteAsync(movieToDelete);
 
         return response;
     }
-
-    #endregion
-
-    #region private methods
-
+    
     private static void ValidateMovieRequest(MovieRequest movieRequest)
     {
         var movieRequestValidator = new MovieRequestValidator();
         var validate = movieRequestValidator.Validate(movieRequest).IsValid;
         if (!validate)
         {
-            throw new MovieRequestBadRequestException(ExceptionUtil.MovieRequestBadRequestMessage);
+            throw new MovieRequestBadRequestException(ConstUtil.MovieRequestBadRequestMessage);
         }
     }
 
-    private async Task<long> GenerateSequenceId()
+    private static async Task<long> GenerateSequenceId()
     {
-        var movies = await _movieRepository.FindAsync();
+        var movies = await MoviesRepository.FindAsync();
         var actualMovieId = movies.MaxBy(movieItem => movieItem.Id)!.Id++;
 
         return actualMovieId + 1;
     }
 
-    private async Task ValidateIfMovieExist(string movieName)
+    private static async Task ValidateIfMovieExist(string movieName)
     {
-        var moviesMatches = await _movieRepository.FindAsync(movieName);
+        var moviesMatches = await MoviesRepository.FindAsync(movieName);
         if (moviesMatches.Any())
         {
-            throw new MovieConflictException(ExceptionUtil.MoviesConflictAlreadyExistMessage);
+            throw new MovieConflictException(ConstUtil.MoviesConflictAlreadyExistMessage);
         }
     }
-
-    #endregion
 }

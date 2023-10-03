@@ -9,33 +9,33 @@ namespace BlockMaster.Tests.Hooks;
 [Binding]
 public class Hook
 {
-    private static DynamoDbContainer _dynamoDbContainer;
+    private static LocalStackContainer _localStackContainer;
     private static AppFactoryFixture _appFactoryFixture;
     private static ElastiCacheContainer _elastiCacheContainer;
 
-    private static DynamoDbContainer DynamoDbContainer =>
-        _dynamoDbContainer ?? new DynamoDbContainer();
+    private static LocalStackContainer LocalStackContainer =>
+        _localStackContainer ??= new LocalStackContainer();
 
     private static AppFactoryFixture AppFactoryFixture =>
-        _appFactoryFixture ?? new AppFactoryFixture();
+        _appFactoryFixture ??= new AppFactoryFixture();
 
     private static ElastiCacheContainer ElastiCacheContainer =>
-        _elastiCacheContainer ?? new ElastiCacheContainer();
-    
+        _elastiCacheContainer ??= new ElastiCacheContainer();
+
 
     [BeforeTestRun]
     public static async Task BeforeTestRun()
     {
         Environment.SetEnvironmentVariable("IntegrationTestEnvironment", "IntegrationTest");
-        await DynamoDbContainer.InitializeAsync();
-        await DynamoDbContainer.PopulateDynamoDb();
+        await LocalStackContainer.InitializeAsync();
+        await LocalStackContainer.PopulateDynamoDb();
         await ElastiCacheContainer.InitializeAsync();
     }
 
     [AfterTestRun]
     public static async Task AfterTestRun()
     {
-        await DynamoDbContainer.DisposeAsync();
+        await LocalStackContainer.DisposeAsync();
         await AppFactoryFixture.DisposeAsync();
         await ElastiCacheContainer.DisposeAsync();
     }

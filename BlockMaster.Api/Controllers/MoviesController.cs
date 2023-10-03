@@ -1,10 +1,13 @@
 using BlockMaster.Business.Services;
 using BlockMaster.Domain.Request;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
+[EnableCors("AllowCorsPolicy")]
 [Route("[controller]")]
+[ApiVersion("1")]
 public class MoviesController : ControllerBase
 {
     private readonly MovieService _movieService;
@@ -24,7 +27,7 @@ public class MoviesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var response = await _movieService.FindAll();
+        var response = await MovieService.FindAll();
         return Ok(response);
     }
 
@@ -38,7 +41,7 @@ public class MoviesController : ControllerBase
     [HttpPut("{movieName}")]
     public async Task<IActionResult> Put(string movieName, [FromBody] MovieRequest movieRequest)
     {
-        var response = await _movieService.Update(movieName, movieRequest);
+        var response = await MovieService.Update(movieName, movieRequest);
 
         return Ok(response);
     }
@@ -46,7 +49,7 @@ public class MoviesController : ControllerBase
     [HttpDelete("{movieName}")]
     public async Task<IActionResult> Delete(string movieName)
     {
-        var response = await _movieService.Delete(movieName);
+        var response = await MovieService.Delete(movieName);
 
         return Ok(response);
     }

@@ -8,16 +8,12 @@ namespace BlockMaster.Api.Util.Modules;
 [ExcludeFromCodeCoverage]
 public class ServicesModule : Module
 {
-    #region protected methods
-
     protected override void Load(ContainerBuilder builder)
     {
         builder
-            .Register((context, _) => new MovieService(context.Resolve<MoviesRepository>(), 
+            .Register((context, _) => new MovieService(context.Resolve<MoviesRepository>(),
                 context.Resolve<CacheRepository>()))
             .As<MovieService>()
             .SingleInstance();
     }
-
-    #endregion
 }

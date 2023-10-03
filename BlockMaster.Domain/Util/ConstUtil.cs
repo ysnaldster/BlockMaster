@@ -1,6 +1,6 @@
 namespace BlockMaster.Domain.Util;
 
-public static class ExceptionUtil
+public static class ConstUtil
 {
     public const string
         InternalServerErrorMessage = "Action could not be executed",
@@ -9,4 +9,10 @@ public static class ExceptionUtil
         MoviesConflictAlreadyExistMessage = "the movie already exists",
         MovieRequestBadRequestMessage = "Movie request does not meet the requirements",
         MovieRequestCategoryBadRequestMessage = "The inserted category does not correspond to the allowed ones.";
+
+    public const string
+        ParameterStorePath = "/BlockMaster/",
+        AwsHost = "http://localhost:4566",
+        AwsAccessKey = "123",
+        AwsSecretAccessKey = "123";
 }
