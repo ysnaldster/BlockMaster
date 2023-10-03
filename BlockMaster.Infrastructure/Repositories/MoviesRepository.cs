@@ -37,7 +37,7 @@ public class MoviesRepository
             : throw new InternalServerErrorException(ConstUtil.InternalServerErrorMessage);
     }
 
-    public static async Task<List<Movie>> FindAsync(string movieName = null!)
+    public async Task<List<Movie>> FindAsync(string movieName = null!)
     {
         try
         {
@@ -52,7 +52,7 @@ public class MoviesRepository
         }
     }
 
-    public static async Task<Movie> UpdateAsync(Movie movie)
+    public async Task<Movie> UpdateAsync(Movie movie)
     {
         try
         {
@@ -68,7 +68,7 @@ public class MoviesRepository
         }
     }
 
-    public static async Task<Movie> DeleteAsync(Movie movie)
+    public async Task<Movie> DeleteAsync(Movie movie)
     {
         var scanFilter = new ScanFilter();
         scanFilter.AddCondition("Name", ScanOperator.Equal, movie.Name);

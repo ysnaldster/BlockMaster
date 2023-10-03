@@ -1,4 +1,4 @@
-﻿namespace BlockMaster.Domain.Util;
+namespace BlockMaster.Domain.Util;
 
 public static class ConstUtil
 {
