@@ -1,4 +1,4 @@
-﻿using BlockMaster.Business.Util;
+using BlockMaster.Business.Util;
 using BlockMaster.Domain.Entities;
 using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Exceptions.ConflictException;
