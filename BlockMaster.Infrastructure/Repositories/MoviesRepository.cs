@@ -12,15 +12,9 @@ namespace BlockMaster.Infrastructure.Repositories;
 
 public class MoviesRepository
 {
-    #region private attributes
-
     private readonly IAmazonDynamoDB _amazonDynamoDb;
     private readonly string _moviesTableName;
     private static Table? _moviesTable;
-
-    #endregion
-
-    #region public methods
 
     public MoviesRepository(IAmazonDynamoDB amazonDynamoDb, string moviesTableName)
     {
@@ -40,10 +34,10 @@ public class MoviesRepository
 
         return response.HttpStatusCode == HttpStatusCode.OK
             ? movie
-            : throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+            : throw new InternalServerErrorException(ConstUtil.InternalServerErrorMessage);
     }
 
-    public async Task<List<Movie>> FindAsync(string movieName = null!)
+    public static async Task<List<Movie>> FindAsync(string movieName = null!)
     {
         try
         {
@@ -54,11 +48,11 @@ public class MoviesRepository
         catch (Exception e)
         {
             Log.Error($"{e.Message}-{e.StackTrace}");
-            throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+            throw new InternalServerErrorException(ConstUtil.InternalServerErrorMessage);
         }
     }
 
-    public async Task<Movie> UpdateAsync(Movie movie)
+    public static async Task<Movie> UpdateAsync(Movie movie)
     {
         try
         {
@@ -70,11 +64,11 @@ public class MoviesRepository
         catch (Exception e)
         {
             Log.Error($"{e.Message}-{e.StackTrace}");
-            throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+            throw new InternalServerErrorException(ConstUtil.InternalServerErrorMessage);
         }
     }
 
-    public async Task<Movie> DeleteAsync(Movie movie)
+    public static async Task<Movie> DeleteAsync(Movie movie)
     {
         var scanFilter = new ScanFilter();
         scanFilter.AddCondition("Name", ScanOperator.Equal, movie.Name);
@@ -90,12 +84,8 @@ public class MoviesRepository
 
         return result.IsCompletedSuccessfully
             ? movie
-            : throw new InternalServerErrorException(ExceptionUtil.InternalServerErrorMessage);
+            : throw new InternalServerErrorException(ConstUtil.InternalServerErrorMessage);
     }
-
-    #endregion
-
-    #region private methods
 
     private static Dictionary<string, AttributeValue> ParseMovieToDictionary(Movie movie)
     {
@@ -125,6 +115,4 @@ public class MoviesRepository
 
         return movieToDocument;
     }
-
-    #endregion
 }

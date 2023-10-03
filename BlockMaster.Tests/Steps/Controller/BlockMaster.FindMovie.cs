@@ -4,7 +4,7 @@ using BlockMaster.Tests.Hooks.AppFactory;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
-namespace BlockMaster.Tests;
+namespace BlockMaster.Tests.Steps.Controller;
 
 [Binding]
 public class UnitTest1
@@ -28,8 +28,9 @@ public class UnitTest1
     [Then("the ip validation result should be 204")]
     public async void Test1()
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:4566/Movies/1");
+        var request = new HttpRequestMessage(HttpMethod.Get, $"block-master/v1/movies/E.T");
         var response = await _httpClient.SendAsync(request);
+        var actualContent = await response.Content.ReadAsStringAsync();
         var test = "HolaMundo";
         test.Should().Be("HolaMundo");
     }

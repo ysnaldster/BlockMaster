@@ -5,8 +5,6 @@ namespace BlockMaster.Infrastructure.Helpers;
 
 public static class MovieHelper
 {
-    #region public methods
-
     public static async Task<List<Movie>> ScanAsync(Table table, string movieName = null!)
     {
         var moviesList = new List<Movie>();
@@ -45,6 +43,4 @@ public static class MovieHelper
 
         return moviesList;
     }
-
-    #endregion
 }

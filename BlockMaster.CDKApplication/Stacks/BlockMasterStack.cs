@@ -16,16 +16,10 @@ using TagsManager = Tags;
 [ExcludeFromCodeCoverage]
 public class BlockMasterStack : Stack
 {
-    #region private attributes
-
     private readonly BlockMasterStackProps _customProps;
     private IManagedPolicy? _managedPolicy;
     private IRepository? _repository;
 
-    #endregion
-
-
-    #region public methods
 
     public BlockMasterStack(Construct scope, string id, IStackProps props, BlockMasterStackProps customProps) : base(
         scope, id, props)
@@ -36,10 +30,6 @@ public class BlockMasterStack : Stack
         CreateDynamoTable();
         AddParameterStore(_customProps);
     }
-
-    #endregion
-
-    #region private methods
 
     private void GenerateEcrRepository()
     {
@@ -128,6 +118,4 @@ public class BlockMasterStack : Stack
             }
         });
     }
-
-    #endregion
 }

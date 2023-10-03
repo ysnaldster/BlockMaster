@@ -6,8 +6,10 @@ using BlockMaster.Tests.Util;
 
 namespace BlockMaster.Tests.Configuration;
 
-public class LocalSystemManagerConfiguration
+public static class LocalSystemManagerConfiguration
 {
+    private const string DataType = "text";
+
     private static readonly AmazonSimpleSystemsManagementConfig SystemsManagementConfig = new()
     {
         RegionEndpoint = RegionEndpoint.GetBySystemName(ConstUtil.AwsRegion),
@@ -29,7 +31,7 @@ public class LocalSystemManagerConfiguration
             Name = name,
             Value = value,
             Type = ParameterType.String,
-            DataType = "text",
+            DataType = DataType,
             Tier = ParameterTier.Standard
         };
 

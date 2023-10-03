@@ -6,15 +6,9 @@ namespace BlockMaster.Infrastructure.Repositories;
 
 public class CacheRepository
 {
-    #region private attibutes
-
     private readonly ElastiCacheClient _elastiCacheClient;
     private const string HashMainKey = "Movies";
-
-    #endregion
-
-    #region public methods
-
+    
     public CacheRepository(ElastiCacheClient elastiCacheClient)
     {
         _elastiCacheClient = elastiCacheClient;
@@ -24,6 +18,7 @@ public class CacheRepository
     {
         var redisConnection = _elastiCacheClient.GetDatabase();
         var movieValue = JsonSerializer.Serialize(movie);
+
         await redisConnection.HashSetAsync(HashMainKey, movie.Name, movieValue);
     }
 
@@ -35,6 +30,4 @@ public class CacheRepository
             ? JsonSerializer.Deserialize<Movie>(getMovieHash!)
             : null;
     }
-
-    #endregion
 }

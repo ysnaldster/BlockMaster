@@ -1,10 +1,9 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.Runtime;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using BlockMaster.Api;
 using BlockMaster.Tests.Util;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace BlockMaster.Tests.Hooks.AppFactory;
 
+[ExcludeFromCodeCoverage]
 public class AppFactoryFixture : WebApplicationFactory<Startup>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -46,7 +46,7 @@ public class AppFactoryFixture : WebApplicationFactory<Startup>
 
         base.ConfigureWebHost(builder);
     }
-
+    
     protected override IHost CreateHost(IHostBuilder builder)
     {
         builder.UseServiceProviderFactory(new CustomServiceProviderFactory());

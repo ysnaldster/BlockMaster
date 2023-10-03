@@ -7,17 +7,14 @@ namespace BlockMaster.Tests.Containers;
 
 public class ElastiCacheContainer : IAsyncLifetime
 {
-    #region private attributes
+    private const string RedisImageName = "redis";
+    private const int RedisPort = 6379;
 
     private readonly IContainer _redisContainer = new ContainerBuilder()
-        .WithImage("redis")
+        .WithImage(RedisImageName)
         .WithCleanUp(true)
-        .WithPortBinding(6379, 6379)
+        .WithPortBinding(RedisPort, RedisPort)
         .Build();
-
-    #endregion
-
-    #region public methods
 
     public async Task InitializeAsync()
     {
@@ -29,6 +26,4 @@ public class ElastiCacheContainer : IAsyncLifetime
     {
         await _redisContainer!.DisposeAsync();
     }
-
-    #endregion
 }

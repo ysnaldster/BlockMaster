@@ -1,18 +1,21 @@
+using System.Diagnostics.CodeAnalysis;
 using Amazon;
 using Amazon.Extensions.NETCore.Setup;
 using Amazon.Runtime;
 using Autofac.Extensions.DependencyInjection;
+using BlockMaster.Domain.Util;
 
 namespace BlockMaster.Api;
 
-public class LocalEntryPoint
+[ExcludeFromCodeCoverage]
+public static class LocalEntryPoint
 {
     public static void Main(string[] args)
     {
         CreateHostBuilder(args).Build().Run();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args)
+    private static IHostBuilder CreateHostBuilder(string[] args)
     {
         var awsConfigure = new AWSOptions
         {
@@ -21,8 +24,8 @@ public class LocalEntryPoint
 
         if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("IntegrationTestEnvironment")))
         {
-            awsConfigure.DefaultClientConfig.ServiceURL = "http://localhost:4566";
-            awsConfigure.Credentials = new BasicAWSCredentials("123", "123");
+            awsConfigure.DefaultClientConfig.ServiceURL = ConstUtil.AwsHost;
+            awsConfigure.Credentials = new BasicAWSCredentials(ConstUtil.AwsAccessKey, ConstUtil.AwsSecretAccessKey);
         }
 
         return Host.CreateDefaultBuilder(args)
@@ -34,7 +37,7 @@ public class LocalEntryPoint
                     .ConfigureAppConfiguration((_, config) =>
                     {
                         var configurationBuilder = new ConfigurationBuilder()
-                            .AddSystemsManager("/BlockMaster/", awsConfigure)
+                            .AddSystemsManager(ConstUtil.ParameterStorePath, awsConfigure)
                             .Build();
                         config.AddConfiguration(configurationBuilder);
                     });

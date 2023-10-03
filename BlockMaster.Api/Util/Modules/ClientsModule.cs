@@ -9,8 +9,6 @@ namespace BlockMaster.Api.Util.Modules;
 [ExcludeFromCodeCoverage]
 public class ClientsModule : Module
 {
-    #region protected methods
-
     protected override void Load(ContainerBuilder builder)
     {
         builder
@@ -22,6 +20,4 @@ public class ClientsModule : Module
             .As<ElastiCacheClient>()
             .SingleInstance();
     }
-
-    #endregion
 }
