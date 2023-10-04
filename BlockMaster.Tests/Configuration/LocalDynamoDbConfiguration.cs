@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
@@ -7,6 +8,7 @@ using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
 using BlockMaster.Tests.Util;
+using BlockMaster.Tests.Util.Entity;
 using Newtonsoft.Json;
 
 namespace BlockMaster.Tests.Configuration;
@@ -29,7 +31,7 @@ public static class LocalDynamoDbConfiguration
 
     public static async Task PopulateDynamoDb()
     {
-        await InsertMovie("../../../Util/JsonFiles/GetMovie.json");
+        await InsertMovie("../../../Util/JsonFiles/GetMovies.json");
     }
 
     private static async Task CreateTable()
@@ -71,20 +73,19 @@ public static class LocalDynamoDbConfiguration
         var table = Table.LoadTable(DynamoDbClient, ConstUtil.MovieTableName);
         using var stream = new StreamReader(path);
         var json = await stream.ReadToEndAsync();
-        var movieObject = JsonConvert.DeserializeObject<Movie>(json);
-
-        var movieObjectToStructure = new
+        var moviesList = JsonConvert.DeserializeObject<List<Movie>>(json);
+        foreach (var movieSerialize in moviesList.Select(movie => new
+                 {
+                     movie.Id,
+                     movie.Name,
+                     movie.Description,
+                     movie.Country,
+                     Score = movie.Score.ToString(),
+                     movie.Category
+                 }).Select(JsonConvert.SerializeObject))
         {
-            movieObject.Id,
-            movieObject.Name,
-            movieObject.Description,
-            movieObject.Country,
-            Score = movieObject.Score.ToString(),
-            movieObject.Category
-        };
-        var movieSerialize = JsonConvert.SerializeObject(movieObjectToStructure);
-
-        await table.PutItemAsync(Document.FromJson(movieSerialize));
+            await table.PutItemAsync(Document.FromJson(movieSerialize));
+        }
     }
 
     private static async Task<bool> TableAlreadyExists(string tableName)
