@@ -19,7 +19,7 @@ namespace BlockMaster.Tests.Features.Controller
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class TestTestFeature : object, Xunit.IClassFixture<TestTestFeature.FixtureData>, System.IDisposable
+    public partial class FindMovieFeature : object, Xunit.IClassFixture<FindMovieFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace BlockMaster.Tests.Features.Controller
 #line 1 "BlockMasterFindMovie.feature"
 #line hidden
         
-        public TestTestFeature(TestTestFeature.FixtureData fixtureData, BlockMaster_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FindMovieFeature(FindMovieFeature.FixtureData fixtureData, BlockMaster_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace BlockMaster.Tests.Features.Controller
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Controller", "TestTest", "Enable and disable account IP Validation", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Controller", "Find Movie", "Find movie feature", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,14 +80,14 @@ namespace BlockMaster.Tests.Features.Controller
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Enable Account IP Validation")]
-        [Xunit.TraitAttribute("FeatureTitle", "TestTest")]
-        [Xunit.TraitAttribute("Description", "Enable Account IP Validation")]
-        public void EnableAccountIPValidation()
+        [Xunit.SkippableFactAttribute(DisplayName="Find movie exist by name")]
+        [Xunit.TraitAttribute("FeatureTitle", "Find Movie")]
+        [Xunit.TraitAttribute("Description", "Find movie exist by name")]
+        public void FindMovieExistByName()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Enable Account IP Validation", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find movie exist by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,13 +99,19 @@ namespace BlockMaster.Tests.Features.Controller
             {
                 this.ScenarioStart();
 #line 5
-        testRunner.Given("the account id 9", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("the movie name is E.T", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
-        testRunner.When("ip validation is enabled", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.When("the movie is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
-        testRunner.Then("the ip validation result should be 204", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the movie name should be E.T", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 8
+        testRunner.Then("the http status code should be Ok", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 9
+        testRunner.Then("the movie is contain in the list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -118,12 +124,12 @@ namespace BlockMaster.Tests.Features.Controller
             
             public FixtureData()
             {
-                TestTestFeature.FeatureSetup();
+                FindMovieFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                TestTestFeature.FeatureTearDown();
+                FindMovieFeature.FeatureTearDown();
             }
         }
     }
