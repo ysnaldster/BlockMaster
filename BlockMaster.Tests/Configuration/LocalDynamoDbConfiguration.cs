@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
-using BlockMaster.Infrastructure.Helpers;
 using BlockMaster.Tests.Util;
 using Newtonsoft.Json;
 
@@ -31,12 +29,7 @@ public static class LocalDynamoDbConfiguration
 
     public static async Task PopulateDynamoDb()
     {
-        await InsertMovie("../../../Util/JsonFiles/GetMovies.json");
-    }
-
-    public static async Task ClearDynamoDb()
-    {
-        await DeleteMovies();
+        await InsertMovie("../../../Util/JsonFiles/GetMovie.json");
     }
 
     private static async Task CreateTable()
@@ -78,36 +71,20 @@ public static class LocalDynamoDbConfiguration
         var table = Table.LoadTable(DynamoDbClient, ConstUtil.MovieTableName);
         using var stream = new StreamReader(path);
         var json = await stream.ReadToEndAsync();
-        var moviesList = JsonConvert.DeserializeObject<List<Movie>>(json);
-        foreach (var movieSerialize in moviesList.Select(movie => new
-                 {
-                     movie.Id,
-                     movie.Name,
-                     movie.Description,
-                     movie.Country,
-                     Score = movie.Score.ToString(),
-                     movie.Category
-                 }).Select(JsonConvert.SerializeObject))
-        {
-            await table.PutItemAsync(Document.FromJson(movieSerialize));
-        }
-    }
+        var movieObject = JsonConvert.DeserializeObject<Movie>(json);
 
-    private static async Task DeleteMovies()
-    {
-        var table = Table.LoadTable(DynamoDbClient, ConstUtil.MovieTableName);
-        var moviesList = await MovieHelper.ScanAsync(table);
-        foreach (var movie in moviesList)
+        var movieObjectToStructure = new
         {
-            var primaryKey = new Dictionary<string, AttributeValue>
-                { { "Id", new AttributeValue { N = movie.Id.ToString() } } };
-            var request = new DeleteItemRequest
-            {
-                TableName = ConstUtil.MovieTableName,
-                Key = primaryKey
-            };
-            await DynamoDbClient.DeleteItemAsync(request);
-        }
+            movieObject.Id,
+            movieObject.Name,
+            movieObject.Description,
+            movieObject.Country,
+            Score = movieObject.Score.ToString(),
+            movieObject.Category
+        };
+        var movieSerialize = JsonConvert.SerializeObject(movieObjectToStructure);
+
+        await table.PutItemAsync(Document.FromJson(movieSerialize));
     }
 
     private static async Task<bool> TableAlreadyExists(string tableName)

@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Amazon.DynamoDBv2.DocumentModel;
+﻿using Amazon.DynamoDBv2.DocumentModel;
 using BlockMaster.Domain.Entities;
 
 namespace BlockMaster.Infrastructure.Helpers;
@@ -34,10 +33,7 @@ public static class MovieHelper
                             ? country.S
                             : null,
                         Description = movieToDictionary["Description"].S,
-                        Score = double.TryParse(movieToDictionary["Score"].S, NumberStyles.Float,
-                            CultureInfo.InvariantCulture, out var parsedScore)
-                            ? Math.Round(parsedScore, 1)
-                            : null,
+                        Score = double.Parse(movieToDictionary["Score"].S),
                         Category = movieToDictionary.TryGetValue("Category", out var category)
                             ? category.S
                             : null

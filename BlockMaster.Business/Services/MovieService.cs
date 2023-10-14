@@ -13,7 +13,7 @@ public class MovieService
 {
     private readonly MoviesRepository _movieRepository;
     private readonly CacheRepository _cacheRepository;
-
+    
     public MovieService(MoviesRepository movieRepository, CacheRepository cacheRepository)
     {
         _movieRepository = movieRepository;
@@ -91,18 +91,15 @@ public class MovieService
 
     public async Task<Movie> Delete(string movieName)
     {
-        var movie = (await _movieRepository.FindAsync(movieName))
-            .Find(movie => movie.Name == movieName);
-        if (movie == null)
+        var movieToDelete = new Movie()
         {
-            throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
-        }
-        
-        var response = await _movieRepository.DeleteAsync(movie);
+            Name = movieName
+        };
+        var response = await _movieRepository.DeleteAsync(movieToDelete);
 
         return response;
     }
-
+    
     private static void ValidateMovieRequest(MovieRequest movieRequest)
     {
         var movieRequestValidator = new MovieRequestValidator();

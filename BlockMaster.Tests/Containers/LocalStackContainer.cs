@@ -8,12 +8,12 @@ namespace BlockMaster.Tests.Containers;
 public class LocalStackContainer : IAsyncLifetime
 {
     private const int LocalStackPort = 4566;
-
+    
     private readonly Testcontainers.LocalStack.LocalStackContainer _dynamoDbBuilder = new LocalStackBuilder()
         .WithPortBinding(LocalStackPort, LocalStackPort)
         .WithCleanUp(true)
         .Build();
-
+    
     public async Task InitializeAsync()
     {
         await _dynamoDbBuilder.StartAsync()
@@ -30,12 +30,7 @@ public class LocalStackContainer : IAsyncLifetime
     {
         await LocalDynamoDbConfiguration.PopulateDynamoDb();
     }
-
-    public static async Task ClearDynamoDb()
-    {
-        await LocalDynamoDbConfiguration.ClearDynamoDb();
-    }
-
+    
     private static async Task ConfigureLocalStackContainer()
     {
         await LocalSystemManagerConfiguration.ConfigureParameterStore();
