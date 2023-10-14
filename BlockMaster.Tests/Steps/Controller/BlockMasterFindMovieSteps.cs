@@ -44,10 +44,12 @@ public class BlockMasterFindMovieSteps
         }
     }
 
-    [Then("the movie name should be (.*)")]
-    public void ThenTheMovieNameShouldBe(string movieName)
+    [Then("the movie returned by FindMovie is asserted")]
+    public void ThenTheMovieReturnedByFindMovieIsAsserted()
     {
-        _movieFound.Name.Should().Be(movieName);
+        _moviesMatches.Should().NotBeEmpty();
+        _movieFound.Should().NotBeNull();
+        _movieFound.Name.Should().Be(_movieNameToFind);
     }
 
     [Then("the result should be (.*)")]

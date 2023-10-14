@@ -19,7 +19,7 @@ namespace BlockMaster.Tests.Features.Controller
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class FindMoviesFeature : object, Xunit.IClassFixture<FindMoviesFeature.FixtureData>, System.IDisposable
+    public partial class CreateAMovieFeature : object, Xunit.IClassFixture<CreateAMovieFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace BlockMaster.Tests.Features.Controller
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "BlockMasterFindMovies.feature"
+#line 1 "BlockMasterCreateMovie.feature"
 #line hidden
         
-        public FindMoviesFeature(FindMoviesFeature.FixtureData fixtureData, BlockMaster_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public CreateAMovieFeature(CreateAMovieFeature.FixtureData fixtureData, BlockMaster_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace BlockMaster.Tests.Features.Controller
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Controller", "Find Movies", "Find movies feature", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Controller", "Create a movie", "Create movie feature", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,14 +80,14 @@ namespace BlockMaster.Tests.Features.Controller
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Find movies")]
-        [Xunit.TraitAttribute("FeatureTitle", "Find Movies")]
-        [Xunit.TraitAttribute("Description", "Find movies")]
-        public void FindMovies()
+        [Xunit.SkippableFactAttribute(DisplayName="Movie created successfully")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Movie created successfully")]
+        public void MovieCreatedSuccessfully()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find movies", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Movie created successfully", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -98,17 +98,29 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table1.AddRow(new string[] {
+                            "Ghosted",
+                            "is simply dummy",
+                            "57",
+                            "3.2",
+                            "Action"});
 #line 5
-        testRunner.When("movies are wanted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 6
-        testRunner.Then("the http status code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 7
-        testRunner.Then("the movies returned by FindMovies are asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table1, "Given ");
 #line hidden
 #line 8
-        testRunner.Then("the movies count is equal 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+        testRunner.Then("the response should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 10
+        testRunner.Then("the result returned by CreateMovie is asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -121,12 +133,12 @@ namespace BlockMaster.Tests.Features.Controller
             
             public FixtureData()
             {
-                FindMoviesFeature.FeatureSetup();
+                CreateAMovieFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                FindMoviesFeature.FeatureTearDown();
+                CreateAMovieFeature.FeatureTearDown();
             }
         }
     }

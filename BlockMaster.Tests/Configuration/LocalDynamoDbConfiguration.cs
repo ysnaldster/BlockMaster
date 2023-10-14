@@ -7,8 +7,8 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
+using BlockMaster.Infrastructure.Helpers;
 using BlockMaster.Tests.Util;
-using BlockMaster.Tests.Util.Entity;
 using Newtonsoft.Json;
 
 namespace BlockMaster.Tests.Configuration;
@@ -32,6 +32,11 @@ public static class LocalDynamoDbConfiguration
     public static async Task PopulateDynamoDb()
     {
         await InsertMovie("../../../Util/JsonFiles/GetMovies.json");
+    }
+
+    public static async Task ClearDynamoDb()
+    {
+        await DeleteMovies();
     }
 
     private static async Task CreateTable()
@@ -85,6 +90,23 @@ public static class LocalDynamoDbConfiguration
                  }).Select(JsonConvert.SerializeObject))
         {
             await table.PutItemAsync(Document.FromJson(movieSerialize));
+        }
+    }
+
+    private static async Task DeleteMovies()
+    {
+        var table = Table.LoadTable(DynamoDbClient, ConstUtil.MovieTableName);
+        var moviesList = await MovieHelper.ScanAsync(table);
+        foreach (var movie in moviesList)
+        {
+            var primaryKey = new Dictionary<string, AttributeValue>
+                { { "Id", new AttributeValue { N = movie.Id.ToString() } } };
+            var request = new DeleteItemRequest
+            {
+                TableName = ConstUtil.MovieTableName,
+                Key = primaryKey
+            };
+            await DynamoDbClient.DeleteItemAsync(request);
         }
     }
 

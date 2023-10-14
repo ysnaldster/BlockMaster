@@ -35,6 +35,13 @@ public class BlockMasterFindMoviesSteps
         }
     }
 
+    [Then("the movies returned by FindMovies are asserted")]
+    public void ThenTheMoviesReturnedByFindMoviesAreAsserted()
+    {
+        _moviesMatches.Should().NotBeEmpty();
+        _moviesMatches.Should().NotBeNull();
+    }
+
     [Then("the http status code should be (.*)")]
     public void ThenTheHttpStatusCodeShouldBe(int codeResult)
     {

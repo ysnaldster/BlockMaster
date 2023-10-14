@@ -12,7 +12,7 @@
     "Name": "Avengers",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "Country": "Colombia",
-    "Score": 3.8,
+    "Score": 3.2,
     "Category": "Fantasy"
   },
   {
@@ -20,7 +20,7 @@
     "Name": "In Time",
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     "Country": "Chile",
-    "Score": 2.8,
+    "Score": 2.1,
     "Category": "Thriller"
   }
 ]

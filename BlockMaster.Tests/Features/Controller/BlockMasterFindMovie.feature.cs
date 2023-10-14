@@ -105,7 +105,7 @@ namespace BlockMaster.Tests.Features.Controller
         testRunner.When("the movie is found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
-        testRunner.Then("the movie name should be E.T", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the movie returned by FindMovie is asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 8
         testRunner.Then("the result should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
