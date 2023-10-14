@@ -28,8 +28,19 @@ public class Hook
     {
         Environment.SetEnvironmentVariable("IntegrationTestEnvironment", "IntegrationTest");
         await LocalStackContainer.InitializeAsync();
-        await LocalStackContainer.PopulateDynamoDb();
         await ElastiCacheContainer.InitializeAsync();
+    }
+
+    [BeforeFeature]
+    public static async Task BeforeFeaturesRun()
+    {
+        await LocalStackContainer.PopulateDynamoDb();
+    }
+
+    [AfterFeature]
+    public static async Task AfterFeatureRun()
+    {
+        await LocalStackContainer.ClearDynamoDb();
     }
 
     [AfterTestRun]

@@ -81,6 +81,7 @@ public class MoviesRepository
         var batchWrite = _moviesTable.CreateBatchWrite();
         batchWrite.AddItemToDelete(itemToDelete);
         var result = batchWrite.ExecuteAsync();
+        await result;
 
         return result.IsCompletedSuccessfully
             ? movie

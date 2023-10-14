@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id" : 1,
+    "Name" : "E.T",
+    "Description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "Country" : "Perú",
+    "Score" : 4.5,
+    "Category" : "Adventure"
+  },
+  {
+    "Id": 2,
+    "Name": "Avengers",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "Country": "Colombia",
+    "Score": 3.2,
+    "Category": "Fantasy"
+  },
+  {
+    "Id": 3,
+    "Name": "In Time",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "Country": "Chile",
+    "Score": 2.1,
+    "Category": "Thriller"
+  }
+]
