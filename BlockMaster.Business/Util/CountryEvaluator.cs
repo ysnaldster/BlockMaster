@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 using BlockMaster.Domain.Enums;
+using BlockMaster.Domain.Exceptions.BadRequestException;
+using BlockMaster.Domain.Util;
 
 namespace BlockMaster.Business.Util;
 
@@ -17,7 +19,7 @@ public static class CountryEvaluator
             CountriesCollection.CountriesPrefix.Pe => CountriesCollection.Peru,
             CountriesCollection.CountriesPrefix.Co => CountriesCollection.Colombia,
             CountriesCollection.CountriesPrefix.Cl => CountriesCollection.Chile,
-            _ => throw new ArgumentOutOfRangeException(nameof(country), country, null)
+            _ => throw new MovieRequestBadRequestException(ConstUtil.MovieRequestBadRequestMessageByCountry)
         };
 
         return validate;

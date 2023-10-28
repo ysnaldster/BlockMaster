@@ -80,14 +80,14 @@ namespace BlockMaster.Tests.Features.Controller
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Delete movie doesn\'t exist by name")]
+        [Xunit.SkippableFactAttribute(DisplayName="Delete movie by name")]
         [Xunit.TraitAttribute("FeatureTitle", "Delete a movie")]
-        [Xunit.TraitAttribute("Description", "Delete movie doesn\'t exist by name")]
-        public void DeleteMovieDoesntExistByName()
+        [Xunit.TraitAttribute("Description", "Delete movie by name")]
+        public void DeleteMovieByName()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete movie doesn\'t exist by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete movie by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 4
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -99,27 +99,30 @@ namespace BlockMaster.Tests.Features.Controller
             {
                 this.ScenarioStart();
 #line 5
-        testRunner.Given("the movie name for deleted is Tron", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("the movie name for deleted is In Time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
         testRunner.When("the movie is deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
-        testRunner.Then("the result for http response should be 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the movie deleted is equal to expected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 8
+        testRunner.Then("the result for http response should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Delete movie by name")]
+        [Xunit.SkippableFactAttribute(DisplayName="Delete movie doesn\'t exist by name")]
         [Xunit.TraitAttribute("FeatureTitle", "Delete a movie")]
-        [Xunit.TraitAttribute("Description", "Delete movie by name")]
-        public void DeleteMovieByName()
+        [Xunit.TraitAttribute("Description", "Delete movie doesn\'t exist by name")]
+        public void DeleteMovieDoesntExistByName()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete movie by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete movie doesn\'t exist by name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -129,17 +132,14 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 10
-        testRunner.Given("the movie name for deleted is In Time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 11
-        testRunner.When("the movie is deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.Given("the movie name for deleted is Tron", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 12
-        testRunner.Then("the movie deleted is equal to expected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.When("the movie is deleted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
-        testRunner.Then("the result for http response should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("the result for http response should be 404", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

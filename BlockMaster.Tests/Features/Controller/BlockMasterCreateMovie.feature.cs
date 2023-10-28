@@ -106,7 +106,7 @@ namespace BlockMaster.Tests.Features.Controller
                             "Category"});
                 table1.AddRow(new string[] {
                             "Ghosted",
-                            "is simply dummy",
+                            "is simply dummy1",
                             "57",
                             "3.2",
                             "Action"});
@@ -121,6 +121,264 @@ namespace BlockMaster.Tests.Features.Controller
 #line hidden
 #line 10
         testRunner.Then("the result returned by CreateMovie is asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Try create movie with special characters")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Try create movie with special characters")]
+        public void TryCreateMovieWithSpecialCharacters()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Try create movie with special characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 12
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table2.AddRow(new string[] {
+                            "Any&%%2",
+                            "is simply dummy2",
+                            "51",
+                            "2.5",
+                            "Comedy"});
+#line 13
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table2, "Given ");
+#line hidden
+#line 16
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 17
+        testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create a movie with score out of range")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Create a movie with score out of range")]
+        public void CreateAMovieWithScoreOutOfRange()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with score out of range", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 19
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table3.AddRow(new string[] {
+                            "Test",
+                            "is simply dummy3",
+                            "56",
+                            "7.5",
+                            "Comedy"});
+#line 20
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table3, "Given ");
+#line hidden
+#line 23
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 24
+        testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create a movie with a name longer than 30 characters")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Create a movie with a name longer than 30 characters")]
+        public void CreateAMovieWithANameLongerThan30Characters()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with a name longer than 30 characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 26
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table4.AddRow(new string[] {
+                            "TestTestTestTestTestTestTestTestTestTest",
+                            "is simply dummy3",
+                            "56",
+                            "2.1",
+                            "Comedy"});
+#line 27
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table4, "Given ");
+#line hidden
+#line 30
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 31
+        testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create a movie with a non-existing category")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Create a movie with a non-existing category")]
+        public void CreateAMovieWithANon_ExistingCategory()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with a non-existing category", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 33
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table5.AddRow(new string[] {
+                            "Other",
+                            "is simply dummy3",
+                            "56",
+                            "3.3",
+                            "Other"});
+#line 34
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table5, "Given ");
+#line hidden
+#line 37
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 38
+        testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create a movie with an unalloyed country")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Create a movie with an unalloyed country")]
+        public void CreateAMovieWithAnUnalloyedCountry()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with an unalloyed country", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 40
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table6.AddRow(new string[] {
+                            "LP",
+                            "is simply dummy3",
+                            "55",
+                            "3.3",
+                            "Action"});
+#line 41
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table6, "Given ");
+#line hidden
+#line 44
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 45
+        testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Create a movie with an existing name")]
+        [Xunit.TraitAttribute("FeatureTitle", "Create a movie")]
+        [Xunit.TraitAttribute("Description", "Create a movie with an existing name")]
+        public void CreateAMovieWithAnExistingName()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with an existing name", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 47
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "CountryCode",
+                            "Score",
+                            "Category"});
+                table7.AddRow(new string[] {
+                            "In Time",
+                            "is simply dummy3",
+                            "56",
+                            "3.3",
+                            "Action"});
+#line 48
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table7, "Given ");
+#line hidden
+#line 51
+        testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 52
+        testRunner.Then("the response should be 409", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

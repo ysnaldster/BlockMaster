@@ -3,6 +3,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Exceptions.NotFoundException;
 using BlockMaster.Domain.Util;
 using BlockMaster.Infrastructure.Helpers;
 using Serilog;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BlockMaster.Domain.Entities;
@@ -38,7 +37,6 @@ public class BlockMasterDeleteMovieSteps : TestExtensions
         var response = await _httpClient.SendAsync(request);
         _responseMessage = response;
         var content = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(content);
         if (_responseMessage.IsSuccessStatusCode)
         {
             _movieDeleted = JsonConvert.DeserializeObject<Movie>(content);
