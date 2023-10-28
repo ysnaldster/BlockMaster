@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BlockMaster.Tests.Containers;
 using BlockMaster.Tests.Hooks.AppFactory;
@@ -31,23 +32,23 @@ public class Hook
         await ElastiCacheContainer.InitializeAsync();
     }
 
-    [BeforeFeature]
-    public static async Task BeforeFeaturesRun()
-    {
-        await LocalStackContainer.PopulateDynamoDb();
-    }
-
-    [AfterFeature]
-    public static async Task AfterFeatureRun()
-    {
-        await LocalStackContainer.ClearDynamoDb();
-    }
-
     [AfterTestRun]
     public static async Task AfterTestRun()
     {
         await LocalStackContainer.DisposeAsync();
         await AppFactoryFixture.DisposeAsync();
         await ElastiCacheContainer.DisposeAsync();
+    }
+
+    [BeforeScenario]
+    public static async Task BeforeScenarioRun()
+    {
+        await LocalStackContainer.PopulateDynamoDb();
+    }
+
+    [AfterScenario]
+    public static async Task AfterScenarioRun()
+    {
+        await LocalStackContainer.ClearDynamoDb();
     }
 }

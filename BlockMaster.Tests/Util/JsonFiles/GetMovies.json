@@ -10,9 +10,9 @@
   {
     "Id": 2,
     "Name": "Avengers",
-    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    "Description": "Lorem ipsum dolor sit amet",
     "Country": "Colombia",
-    "Score": 3.2,
+    "Score": 2.2,
     "Category": "Fantasy"
   },
   {
