@@ -15,5 +15,6 @@ public static class ConstUtil
         ParameterStorePath = "/BlockMaster/",
         AwsHost = "http://localhost:4566",
         AwsAccessKey = "123",
-        AwsSecretAccessKey = "123";
+        AwsSecretAccessKey = "123",
+        AllowCorsPolicy = "AllowCorsPolicy";
 }

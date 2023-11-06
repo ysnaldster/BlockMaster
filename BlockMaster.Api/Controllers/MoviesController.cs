@@ -1,11 +1,16 @@
+using BlockMaster.Api.Middleware;
 using BlockMaster.Business.Services;
 using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
-[EnableCors("AllowCorsPolicy")]
+
+[EnableCors(ConstUtil.AllowCorsPolicy)]
+[Authorize]
 [Route("[controller]")]
 [ApiVersion("1")]
 public class MoviesController : ControllerBase
@@ -37,8 +42,9 @@ public class MoviesController : ControllerBase
         var response = await _movieService.FindByName(movieName);
         return Ok(response);
     }
-
+    
     [HttpPut("{movieName}")]
+    [IdentityMiddleware(IdentityUtil.AdminUserClaimName!, IdentityUtil.AdminUserClaimValue!)]
     public async Task<IActionResult> Put(string movieName, [FromBody] MovieRequest movieRequest)
     {
         var response = await _movieService.Update(movieName, movieRequest);
@@ -47,6 +53,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpDelete("{movieName}")]
+    [IdentityMiddleware(IdentityUtil.AdminUserClaimName!, IdentityUtil.AdminUserClaimValue!)]
     public async Task<IActionResult> Delete(string movieName)
     {
         var response = await _movieService.Delete(movieName);

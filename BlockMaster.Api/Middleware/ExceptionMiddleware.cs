@@ -59,7 +59,7 @@ public class ExceptionMiddleware
     private static Task BuildMessageExceptionAsync(HttpContext context, HttpStatusCode statusCode, string? message)
     {
         context.Response.ContentType = ContentType;
-        context.Response.StatusCode = (int)statusCode;
+        context.Response.StatusCode = (int) statusCode;
         var exception = new
         {
             HttpStatusCode = context.Response.StatusCode,

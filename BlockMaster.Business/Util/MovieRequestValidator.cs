@@ -27,10 +27,7 @@ public class MovieRequestValidator : AbstractValidator<MovieRequest>
         var categoryParseToPascal =
             CultureInfo.CurrentCulture.TextInfo.ToTitleCase(categoryInput?.ToLower() ?? string.Empty);
         var validate = Enum.TryParse<CategoriesCollection.MovieCategory>(categoryParseToPascal, out _);
-        if (validate)
-        {
-            return validate;
-        }
+        if (validate) return validate;
 
         throw new MovieRequestCategoryBadRequestException(ConstUtil.MovieRequestCategoryBadRequestMessage);
     }

@@ -28,7 +28,7 @@ public class MovieService
         var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
         request.Country = countryName;
         var isRequestInCache = await _cacheRepository.FindMovieHash(request.Name!);
-        if (isRequestInCache == null)
+        if (isRequestInCache is null)
         {
             await _cacheRepository.CreateMovieHash(request);
         }
@@ -50,11 +50,11 @@ public class MovieService
         return response;
     }
 
-    public async Task<List<Movie>> FindByName(string movieName)
+    public async Task<Movie> FindByName(string movieName)
     {
         var moviesMatches = new List<Movie>();
         var movie = await _cacheRepository.FindMovieHash(movieName);
-        if (movie == null)
+        if (movie is null)
         {
             moviesMatches = await _movieRepository.FindAsync(movieName);
             if (!moviesMatches.Any())
@@ -69,7 +69,9 @@ public class MovieService
             moviesMatches.Add(movie);
         }
 
-        return moviesMatches;
+        var response = moviesMatches.SingleOrDefault()!;
+        
+        return response;
     }
 
     public async Task<Movie> Update(string movieName, MovieRequest movieRequest)
@@ -93,7 +95,7 @@ public class MovieService
     {
         var movie = (await _movieRepository.FindAsync(movieName))
             .Find(movie => movie.Name == movieName);
-        if (movie == null)
+        if (movie is null)
         {
             throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
         }

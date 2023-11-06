@@ -3,6 +3,7 @@ using Autofac;
 using BlockMaster.Api.Extensions;
 using BlockMaster.Api.Middleware;
 using BlockMaster.Api.Util;
+using BlockMaster.Domain.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,12 +21,15 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddCors(o => o.AddPolicy("AllowCorsPolicy", builder =>
+        services.AddCors(o => o.AddPolicy(ConstUtil.AllowCorsPolicy, builder =>
         {
             builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         }));
+
+        services.SetAuthenticationStructure();
+        services.SetAuthorizationStructure();
 
         services.AddControllers()
             .AddNewtonsoftJson(options =>
@@ -62,7 +66,9 @@ public class Startup
 
         app.UseRouting();
 
-        app.UseCors("AllowCorsPolicy");
+        app.UseCors(ConstUtil.AllowCorsPolicy);
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,8 +15,7 @@ public class BlockMasterFindMovieSteps
     private readonly HttpClient _httpClient;
     private string _movieNameToFind;
     private HttpResponseMessage _responseMessage;
-    private List<Movie> _moviesMatches;
-    private Movie _movieFound;
+    private Movie _movieMatches;
 
     public BlockMasterFindMovieSteps(AppFactoryFixture appFactoryFixture)
     {
@@ -39,17 +37,15 @@ public class BlockMasterFindMovieSteps
         var content = await response.Content.ReadAsStringAsync();
         if (_responseMessage.IsSuccessStatusCode)
         {
-            _moviesMatches = JsonConvert.DeserializeObject<List<Movie>>(content);
-            _movieFound = _moviesMatches.Find(movie => movie.Name == _movieNameToFind);
+            _movieMatches = JsonConvert.DeserializeObject<Movie>(content);
         }
     }
 
     [Then("the movie returned by FindMovie is asserted")]
     public void ThenTheMovieReturnedByFindMovieIsAsserted()
     {
-        _moviesMatches.Should().NotBeEmpty();
-        _movieFound.Should().NotBeNull();
-        _movieFound.Name.Should().Be(_movieNameToFind);
+        _movieMatches.Should().NotBeNull();
+        _movieMatches.Name.Should().Be(_movieNameToFind);
     }
 
     [Then("the result should be (.*)")]
