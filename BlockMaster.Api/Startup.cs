@@ -28,7 +28,7 @@ public class Startup
                 .AllowAnyHeader();
         }));
 
-        services.SetAuthenticationStructure();
+        services.SetAuthenticationStructure(Configuration);
         services.SetAuthorizationStructure();
 
         services.AddControllers()

@@ -16,19 +16,17 @@ using TagsManager = Tags;
 [ExcludeFromCodeCoverage]
 public class BlockMasterStack : Stack
 {
-    private readonly BlockMasterStackProps _customProps;
+    private string? _dynamoDbTableName;
     private IManagedPolicy? _managedPolicy;
     private IRepository? _repository;
 
-
-    public BlockMasterStack(Construct scope, string id, IStackProps props, BlockMasterStackProps customProps) : base(
-        scope, id, props)
+    public BlockMasterStack(Construct scope, string id, IStackProps props, BlockMasterStackProps customProps) :
+        base(scope, id, props)
     {
-        _customProps = customProps;
         GenerateManagementPolicy();
         GenerateEcrRepository();
         CreateDynamoTable();
-        AddParameterStore(_customProps);
+        AddParameterStore(customProps);
     }
 
     private void GenerateEcrRepository()
@@ -43,6 +41,7 @@ public class BlockMasterStack : Stack
             BillingMode = BillingMode.PAY_PER_REQUEST,
             PartitionKey = new Attribute { Name = "Id", Type = AttributeType.NUMBER }
         });
+        _dynamoDbTableName = healthCheckTable.TableName;
         TagsManager.Of(healthCheckTable).Add("Name", "MoviesTable");
     }
 
@@ -50,7 +49,8 @@ public class BlockMasterStack : Stack
     {
         var parameters = new Dictionary<string, string>
         {
-            { $"{props.ParameterStorePath}/DynamoDbMoviesTableName", props.MoviesTableName! },
+            { $"{props.ParameterStorePath}/DynamoDbMoviesTableName", _dynamoDbTableName! },
+            { $"{props.ParameterStorePath}/ApiKey", props.ApiKey! }
         };
 
         foreach (var parameter in parameters)

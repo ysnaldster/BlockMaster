@@ -7,7 +7,8 @@ namespace BlockMaster.Api.Extensions;
 
 public static class IdentityExtensions
 {
-    public static void SetAuthenticationStructure(this IServiceCollection serviceCollection)
+    public static void SetAuthenticationStructure(this IServiceCollection serviceCollection,
+        IConfiguration configuration)
     {
         serviceCollection.AddAuthentication(x =>
         {
@@ -18,10 +19,12 @@ public static class IdentityExtensions
         {
             x.TokenValidationParameters = new TokenValidationParameters()
             {
-            //Choose to SecretManager
+                //Choose to SecretManager
                 ValidIssuer = "http://localhost:5000/",
                 ValidAudience = "http://localhost:5000/",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("clave_secreta_de_al_menos_32_bytes")),
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration.GetValue<string>("ApiKey"))),
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,

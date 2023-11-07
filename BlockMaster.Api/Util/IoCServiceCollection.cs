@@ -22,7 +22,7 @@ public static class IoCServiceCollection
     {
         builder.RegisterModule(new ClientsModule());
         builder.RegisterModule(new RepositoriesModule(configuration));
-        builder.RegisterModule(new ServicesModule());
+        builder.RegisterModule(new ServicesModule(configuration));
 
         return builder;
     }
