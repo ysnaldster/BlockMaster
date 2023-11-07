@@ -13,6 +13,6 @@
       "aws-cn"
     ],
     "ParameterStorePath" : "/BlockMaster",
-    "MoviesTableName" : "Here is the value of the table"
+    "ApiKey" : "20TNVC9CN3B483NF9CV9NF8C"
   }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
-
 [EnableCors(ConstUtil.AllowCorsPolicy)]
 [Authorize]
 [Route("[controller]")]
@@ -42,7 +41,7 @@ public class MoviesController : ControllerBase
         var response = await _movieService.FindByName(movieName);
         return Ok(response);
     }
-    
+
     [HttpPut("{movieName}")]
     [IdentityMiddleware(IdentityUtil.AdminUserClaimName!, IdentityUtil.AdminUserClaimValue!)]
     public async Task<IActionResult> Put(string movieName, [FromBody] MovieRequest movieRequest)

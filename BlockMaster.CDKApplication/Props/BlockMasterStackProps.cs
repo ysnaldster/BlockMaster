@@ -6,5 +6,5 @@ namespace BlockMaster.CDKApplication.Props;
 public class BlockMasterStackProps
 {
     public string? ParameterStorePath { get; set; }
-    public string? MoviesTableName { get; set; }
+    public string? ApiKey { get; set; }
 }

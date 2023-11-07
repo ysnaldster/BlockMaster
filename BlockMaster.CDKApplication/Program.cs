@@ -8,22 +8,23 @@ namespace BlockMaster.CDKApplication;
 [ExcludeFromCodeCoverage]
 public static class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
         var app = new App();
-        var blockMasterStackProps = new BlockMasterStackProps()
+        var blockMasterStackProps = new BlockMasterStackProps
         {
             ParameterStorePath = app.Node.TryGetContext("ParameterStorePath") as string,
-            MoviesTableName = app.Node.TryGetContext("MoviesTableName") as string
+            ApiKey = app.Node.TryGetContext("ApiKey") as string
         };
         _ = new BlockMasterStack(app, "BlockMasterCdkApplicationStack", new StackProps
         {
             Env = new Amazon.CDK.Environment
             {
-                Account = "", //Here is the value of the account
+                Account = "757892324335", //Here is the value of the account
                 Region = "us-east-1",
             }
         }, blockMasterStackProps);
+
         app.Synth();
     }
 }
