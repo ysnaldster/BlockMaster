@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using BlockMaster.Domain.Entities;
 using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Request.Identity;
+using BlockMaster.Tests.Helpers;
 using BlockMaster.Tests.Hooks.AppFactory;
 using FluentAssertions;
 using Newtonsoft.Json;
@@ -19,10 +23,27 @@ public class BlockMasterCreateMovieSteps
     private MovieRequest _movieToCreate;
     private Movie _movieCreated;
     private HttpResponseMessage _responseMessage;
+    private TokenGenerationRequest _tokenRequest;
+    private string _token;
 
     public BlockMasterCreateMovieSteps(AppFactoryFixture appFactoryFixture)
     {
         _httpClient = appFactoryFixture.CreateDefaultClient();
+    }
+
+    [Given(@"the data for create a token is")]
+    public void GivenTheDataForCreateATokenIs(Table table)
+    {
+        var tokenDetails = table.Rows.First();
+        _tokenRequest = new TokenGenerationRequest
+        {
+            UserId = tokenDetails["UserId"],
+            Email = tokenDetails["Email"],
+            CustomClaims = new Dictionary<string, object>
+            {
+                { "admin", tokenDetails["CustomClaims"] }
+            }
+        };
     }
 
     [Given("The details for creating the movie are")]
@@ -39,12 +60,24 @@ public class BlockMasterCreateMovieSteps
         };
     }
 
+    [When(@"the token is created")]
+    public async Task WhenTheTokenIsCreated()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, $"block-master/v1/identity/token");
+        var requestSerialize = JsonConvert.SerializeObject(_tokenRequest);
+        request.Content = new StringContent(requestSerialize, Encoding.UTF8, "application/json");
+        var response = await _httpClient.SendAsync(request);
+
+        _token = IdentityHelper.ExtractToken(await response.Content.ReadAsStringAsync());
+    }
+
     [When("The movie is created")]
     public async Task WhenTheMovieIsCreated()
     {
         var request = new HttpRequestMessage(HttpMethod.Post, $"block-master/v1/movies");
         var movieToSerialize = JsonConvert.SerializeObject(_movieToCreate);
         request.Content = new StringContent(movieToSerialize, Encoding.UTF8, "application/json");
+        request.Headers.Authorization = new AuthenticationHeaderValue("bearer", _token);
         var response = await _httpClient.SendAsync(request);
         _responseMessage = response;
         var content = await _responseMessage.Content.ReadAsStringAsync();

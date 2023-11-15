@@ -7,5 +7,6 @@ public static class ConstUtil
         AwsAccessKey = "123",
         AwsSecretAccessKey = "123",
         AwsHost = "http://localhost:4566",
-        MovieTableName = "Movies";
+        MovieTableName = "Movies",
+        ApiKey = "20TNVC9CN3B483NF9CV9NF8C";
 }

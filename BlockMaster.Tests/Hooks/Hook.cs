@@ -22,8 +22,7 @@ public class Hook
 
     private static ElastiCacheContainer ElastiCacheContainer =>
         _elastiCacheContainer ??= new ElastiCacheContainer();
-
-
+    
     [BeforeTestRun]
     public static async Task BeforeTestRun()
     {

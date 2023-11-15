@@ -1,5 +1,6 @@
 ﻿namespace BlockMaster.Domain.Request.Identity;
 
+[Serializable]
 public class TokenGenerationRequest
 {
     public string? UserId { get; set; }

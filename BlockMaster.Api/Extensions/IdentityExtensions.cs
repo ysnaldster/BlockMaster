@@ -19,7 +19,6 @@ public static class IdentityExtensions
         {
             x.TokenValidationParameters = new TokenValidationParameters()
             {
-                //Choose to SecretManager
                 ValidIssuer = "http://localhost:5000/",
                 ValidAudience = "http://localhost:5000/",
                 IssuerSigningKey =
