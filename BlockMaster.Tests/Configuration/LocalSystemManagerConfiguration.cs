@@ -22,6 +22,8 @@ public static class LocalSystemManagerConfiguration
     public static async Task ConfigureParameterStore()
     {
         await ConfigureParameter("/BlockMaster/DynamoDbMoviesTableName", ConstUtil.MovieTableName);
+        await ConfigureParameter("/BlockMaster/ApiKey", ConstUtil.ApiKey);
+
     }
 
     private static async Task ConfigureParameter(string name, string value)

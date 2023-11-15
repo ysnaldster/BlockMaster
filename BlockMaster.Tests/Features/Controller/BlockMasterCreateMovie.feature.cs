@@ -75,6 +75,26 @@ namespace BlockMaster.Tests.Features.Controller
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+    #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserId",
+                        "Email",
+                        "CustomClaims"});
+            table1.AddRow(new string[] {
+                        "8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf5",
+                        "user@mail.com",
+                        "admin"});
+#line 5
+        testRunner.Given("the data for create a token is", ((string)(null)), table1, "Given ");
+#line hidden
+#line 8
+          testRunner.When("the token is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -88,7 +108,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Movie created successfully", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 4
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -98,28 +118,31 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "Ghosted",
                             "is simply dummy1",
                             "57",
                             "3.2",
                             "Action"});
-#line 5
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table1, "Given ");
+#line 11
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table2, "Given ");
 #line hidden
-#line 8
+#line 14
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 9
+#line 15
         testRunner.Then("the response should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 10
+#line 16
         testRunner.Then("the result returned by CreateMovie is asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -134,7 +157,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Try create movie with special characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 12
+#line 18
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -144,25 +167,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table2.AddRow(new string[] {
+                table3.AddRow(new string[] {
                             "Any&%%2",
                             "is simply dummy2",
                             "51",
                             "2.5",
                             "Comedy"});
-#line 13
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table2, "Given ");
+#line 19
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table3, "Given ");
 #line hidden
-#line 16
+#line 22
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 17
+#line 23
         testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -177,7 +203,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with score out of range", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
+#line 25
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -187,25 +213,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Test",
                             "is simply dummy3",
                             "56",
                             "7.5",
                             "Comedy"});
-#line 20
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table3, "Given ");
+#line 26
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table4, "Given ");
 #line hidden
-#line 23
+#line 29
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 24
+#line 30
         testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -220,7 +249,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with a name longer than 30 characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 26
+#line 32
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -230,25 +259,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table4.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "TestTestTestTestTestTestTestTestTestTest",
                             "is simply dummy3",
                             "56",
                             "2.1",
                             "Comedy"});
-#line 27
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table4, "Given ");
+#line 33
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table5, "Given ");
 #line hidden
-#line 30
+#line 36
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 31
+#line 37
         testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -263,7 +295,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with a non-existing category", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+#line 39
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -273,25 +305,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table5.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "Other",
                             "is simply dummy3",
                             "56",
                             "3.3",
                             "Other"});
-#line 34
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table5, "Given ");
+#line 40
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table6, "Given ");
 #line hidden
-#line 37
+#line 43
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 38
+#line 44
         testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -306,7 +341,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with an unalloyed country", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 40
+#line 46
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -316,25 +351,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table6.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "LP",
                             "is simply dummy3",
                             "55",
                             "3.3",
                             "Action"});
-#line 41
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table6, "Given ");
+#line 47
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table7, "Given ");
 #line hidden
-#line 44
+#line 50
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 45
+#line 51
         testRunner.Then("the response should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -349,7 +387,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with an existing name", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 47
+#line 53
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -359,25 +397,28 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+#line 4
+    this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table7.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "In Time",
                             "is simply dummy3",
                             "56",
                             "3.3",
                             "Action"});
-#line 48
-        testRunner.Given("The details for creating the movie are", ((string)(null)), table7, "Given ");
+#line 54
+        testRunner.Given("The details for creating the movie are", ((string)(null)), table8, "Given ");
 #line hidden
-#line 51
+#line 57
         testRunner.When("The movie is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 52
+#line 58
         testRunner.Then("the response should be 409", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

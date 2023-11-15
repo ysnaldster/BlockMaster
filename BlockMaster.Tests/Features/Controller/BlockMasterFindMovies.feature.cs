@@ -75,6 +75,26 @@ namespace BlockMaster.Tests.Features.Controller
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+    #line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserId",
+                        "Email",
+                        "CustomClaims"});
+            table11.AddRow(new string[] {
+                        "8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf9",
+                        "user4@mail.com",
+                        "true"});
+#line 5
+        testRunner.Given("the data for create a token for find movies is", ((string)(null)), table11, "Given ");
+#line hidden
+#line 8
+        testRunner.When("the token for find movies is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -88,7 +108,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Find movies", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 4
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -98,16 +118,19 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 11
         testRunner.When("movies are wanted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 6
+#line 12
         testRunner.Then("the http status code should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 7
+#line 13
         testRunner.Then("the movies returned by FindMovies are asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 8
+#line 14
         testRunner.Then("the movies count is equal 3", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

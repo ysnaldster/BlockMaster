@@ -1,6 +1,12 @@
 Feature: Update a movie
 Update movie feature
     
+    Background:
+        Given the data for create a token for update is
+          | UserId                               | Email         | CustomClaims |
+          | 8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf5 | user@mail.com | true        |
+        When the token for update is created
+    
     Scenario: Update a movie with valid information
         Given the movie name for update is Avengers
         Given The details for updating the movie are

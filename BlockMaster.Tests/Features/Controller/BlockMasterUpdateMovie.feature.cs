@@ -75,6 +75,26 @@ namespace BlockMaster.Tests.Features.Controller
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+    #line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "UserId",
+                        "Email",
+                        "CustomClaims"});
+            table12.AddRow(new string[] {
+                        "8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf5",
+                        "user@mail.com",
+                        "true"});
+#line 5
+        testRunner.Given("the data for create a token for update is", ((string)(null)), table12, "Given ");
+#line hidden
+#line 8
+        testRunner.When("the token for update is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
@@ -88,7 +108,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a movie with valid information", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 4
+#line 10
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -98,31 +118,34 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 11
         testRunner.Given("the movie name for update is Avengers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table8.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Born",
                             "is simply dummy6",
                             "51",
                             "4.3",
                             "Action"});
-#line 6
-        testRunner.Given("The details for updating the movie are", ((string)(null)), table8, "Given ");
+#line 12
+        testRunner.Given("The details for updating the movie are", ((string)(null)), table13, "Given ");
 #line hidden
-#line 9
+#line 15
         testRunner.When("The movie is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 10
+#line 16
         testRunner.Then("the result returned by UpdateMovie is asserted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 11
+#line 17
         testRunner.Then("the response for UpdateMovie should be 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -137,7 +160,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a movie with invalid name", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 13
+#line 19
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -147,28 +170,31 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 14
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 20
         testRunner.Given("the movie name for update is In Time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table9.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "C@rdig@12/",
                             "is simply dummy6",
                             "51",
                             "4.3",
                             "Action"});
-#line 15
-        testRunner.Given("The details for updating the movie are", ((string)(null)), table9, "Given ");
+#line 21
+        testRunner.Given("The details for updating the movie are", ((string)(null)), table14, "Given ");
 #line hidden
-#line 18
+#line 24
         testRunner.When("The movie is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
+#line 25
         testRunner.Then("the response for UpdateMovie should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -183,7 +209,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a movie with invalid score", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 21
+#line 27
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -193,28 +219,31 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 22
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 28
         testRunner.Given("the movie name for update is E.T", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table10.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "ELP",
                             "is simply dummy6",
                             "51",
                             "7.3",
                             "Drama"});
-#line 23
-        testRunner.Given("The details for updating the movie are", ((string)(null)), table10, "Given ");
+#line 29
+        testRunner.Given("The details for updating the movie are", ((string)(null)), table15, "Given ");
 #line hidden
-#line 26
+#line 32
         testRunner.When("The movie is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 27
+#line 33
         testRunner.Then("the response for UpdateMovie should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -229,7 +258,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update a movie with invalid country code", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 29
+#line 35
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -239,28 +268,31 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 30
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 36
         testRunner.Given("the movie name for update is E.T", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table11.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "Hots",
                             "is simply dummy6",
                             "52",
                             "3.3",
                             "Fantasy"});
-#line 31
-        testRunner.Given("The details for updating the movie are", ((string)(null)), table11, "Given ");
+#line 37
+        testRunner.Given("The details for updating the movie are", ((string)(null)), table16, "Given ");
 #line hidden
-#line 34
+#line 40
         testRunner.When("The movie is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 35
+#line 41
         testRunner.Then("the response for UpdateMovie should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -275,7 +307,7 @@ namespace BlockMaster.Tests.Features.Controller
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a movie with a name longer than 30 characters", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 37
+#line 43
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -285,28 +317,31 @@ namespace BlockMaster.Tests.Features.Controller
             else
             {
                 this.ScenarioStart();
-#line 38
+#line 4
+    this.FeatureBackground();
+#line hidden
+#line 44
         testRunner.Given("the movie name for update is In Time", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
                             "CountryCode",
                             "Score",
                             "Category"});
-                table12.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "TestTestTestTestTestTestTestTestTest",
                             "is simply dummy6",
                             "51",
                             "3.3",
                             "Fantasy"});
-#line 39
-        testRunner.Given("The details for updating the movie are", ((string)(null)), table12, "Given ");
+#line 45
+        testRunner.Given("The details for updating the movie are", ((string)(null)), table17, "Given ");
 #line hidden
-#line 42
+#line 48
         testRunner.When("The movie is updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 43
+#line 49
         testRunner.Then("the response for UpdateMovie should be 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
