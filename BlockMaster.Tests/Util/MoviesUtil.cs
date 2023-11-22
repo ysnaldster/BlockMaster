@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using BlockMaster.Domain.Entities;
 using Newtonsoft.Json;
 
-namespace BlockMaster.Tests.Extensions;
+namespace BlockMaster.Tests.Util;
 
-public class TestExtensions
+public static class MoviesUtil
 {
-    protected static async Task<List<Movie>> GetMoviesFromStreamReader(string path)
+    public static async Task<List<Movie>> GetMoviesFromStreamReader(string path)
     {
         using var streamReader = new StreamReader(path);
         var stringResult = await streamReader.ReadToEndAsync();

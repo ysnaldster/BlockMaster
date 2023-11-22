@@ -1,5 +1,5 @@
-﻿using BlockMaster.Business.Services;
-using BlockMaster.Domain.Request.Identity;
+﻿using BlockMaster.Domain.Request.Identity;
+using BlockMaster.Domain.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +10,9 @@ namespace BlockMaster.Api.Controllers;
 [ApiVersion("1")]
 public class IdentityController : ControllerBase
 {
-    private readonly GenerateTokenService _generateTokenService;
+    private readonly IGenerateTokenService _generateTokenService;
 
-    public IdentityController(GenerateTokenService generateTokenService)
+    public IdentityController(IGenerateTokenService generateTokenService)
     {
         _generateTokenService = generateTokenService;
     }
