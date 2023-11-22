@@ -19,14 +19,14 @@ public static class MovieHelper
         {
             Filter = scanFilter
         };
-        var search = table!.Scan(scanOperation);
+        var search = table.Scan(scanOperation);
         do
         {
             var results = await search.GetNextSetAsync();
-            if (results.Count > 0)
+            if (results.Any())
             {
                 moviesList.AddRange(results.Select(movie => movie.ToAttributeMap())
-                    .Select(movieToDictionary => new Movie()
+                    .Select(movieToDictionary => new Movie
                     {
                         Id = long.Parse(movieToDictionary["Id"].N),
                         Name = movieToDictionary["Name"].S,

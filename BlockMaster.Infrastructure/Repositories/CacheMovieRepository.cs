@@ -1,20 +1,21 @@
 ﻿using System.Text.Json;
 using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Repositories;
 using BlockMaster.Infrastructure.Clients;
 
 namespace BlockMaster.Infrastructure.Repositories;
 
-public class CacheRepository
+public class CacheMovieRepository : ICacheMovieRepository
 {
     private readonly ElastiCacheClient _elastiCacheClient;
     private const string HashMainKey = "Movies";
     
-    public CacheRepository(ElastiCacheClient elastiCacheClient)
+    public CacheMovieRepository(ElastiCacheClient elastiCacheClient)
     {
         _elastiCacheClient = elastiCacheClient;
     }
 
-    public async Task CreateMovieHash(Movie movie)
+    public async Task CreateHash(Movie movie)
     {
         var redisConnection = _elastiCacheClient.GetDatabase();
         var movieValue = JsonSerializer.Serialize(movie);
@@ -22,7 +23,7 @@ public class CacheRepository
         await redisConnection.HashSetAsync(HashMainKey, movie.Name, movieValue);
     }
 
-    public async Task<Movie?> FindMovieHash(string movieName)
+    public async Task<Movie?> FindHash(string movieName)
     {
         var redisConnection = _elastiCacheClient.GetDatabase();
         var getMovieHash = await redisConnection.HashGetAsync(HashMainKey, movieName);

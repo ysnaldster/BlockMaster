@@ -1,6 +1,6 @@
 using BlockMaster.Api.Middleware;
-using BlockMaster.Business.Services;
 using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Services;
 using BlockMaster.Domain.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -14,9 +14,9 @@ namespace BlockMaster.Api.Controllers;
 [ApiVersion("1")]
 public class MoviesController : ControllerBase
 {
-    private readonly MovieService _movieService;
+    private readonly IMovieService _movieService;
 
-    public MoviesController(MovieService movieService)
+    public MoviesController(IMovieService movieService)
     {
         _movieService = movieService;
     }
@@ -25,6 +25,7 @@ public class MoviesController : ControllerBase
     public async Task<IActionResult> Post([FromBody] MovieRequest movieRequest)
     {
         var response = await _movieService.Create(movieRequest);
+
         return Ok(response);
     }
 
@@ -32,13 +33,15 @@ public class MoviesController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var response = await _movieService.FindAll();
+
         return Ok(response);
     }
 
     [HttpGet("{movieName}")]
     public async Task<IActionResult> Get(string movieName)
     {
-        var response = await _movieService.FindByName(movieName);
+        var response = await _movieService.Find(movieName);
+
         return Ok(response);
     }
 

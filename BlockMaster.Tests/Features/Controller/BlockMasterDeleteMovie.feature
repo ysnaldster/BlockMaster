@@ -1,12 +1,6 @@
 Feature: Delete a movie
 Delete movie feature
 
-    Background:
-        Given the data for create a token for delete movie is
-          | UserId                               | Email         | CustomClaims |
-          | 8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf6 | user2@mail.com | true        |
-        When the token for delete a movie is created
-
     Scenario: Delete movie by name
         Given the movie name for deleted is In Time
         When the movie is deleted

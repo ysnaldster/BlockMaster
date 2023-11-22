@@ -3,6 +3,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using BlockMaster.Domain.Entities;
+using BlockMaster.Domain.Repositories;
 using BlockMaster.Domain.Util;
 using BlockMaster.Infrastructure.Helpers;
 using Serilog;
@@ -10,7 +11,7 @@ using Exception = System.Exception;
 
 namespace BlockMaster.Infrastructure.Repositories;
 
-public class MoviesRepository
+public class MoviesRepository : IMovieRepository
 {
     private readonly IAmazonDynamoDB _amazonDynamoDb;
     private readonly string _moviesTableName;

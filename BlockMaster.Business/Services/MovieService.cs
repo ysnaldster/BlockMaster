@@ -3,21 +3,22 @@ using BlockMaster.Domain.Entities;
 using BlockMaster.Domain.Exceptions.BadRequestException;
 using BlockMaster.Domain.Exceptions.ConflictException;
 using BlockMaster.Domain.Exceptions.NotFoundException;
+using BlockMaster.Domain.Repositories;
 using BlockMaster.Domain.Request;
+using BlockMaster.Domain.Services;
 using BlockMaster.Domain.Util;
-using BlockMaster.Infrastructure.Repositories;
 
 namespace BlockMaster.Business.Services;
 
-public class MovieService
+public class MovieService : IMovieService
 {
-    private readonly MoviesRepository _movieRepository;
-    private readonly CacheRepository _cacheRepository;
+    private readonly IMovieRepository _movieRepository;
+    private readonly ICacheMovieRepository _cacheMovieRepository;
 
-    public MovieService(MoviesRepository movieRepository, CacheRepository cacheRepository)
+    public MovieService(IMovieRepository movieRepository, ICacheMovieRepository cacheMovieRepository)
     {
         _movieRepository = movieRepository;
-        _cacheRepository = cacheRepository;
+        _cacheMovieRepository = cacheMovieRepository;
     }
 
     public async Task<Movie> Create(MovieRequest movieRequest)
@@ -27,10 +28,10 @@ public class MovieService
         var request = new Movie(movieId, movieRequest);
         var countryName = CountryEvaluator.ConvertCountryCodeToCountryName(movieRequest.CountryCode!);
         request.Country = countryName;
-        var isRequestInCache = await _cacheRepository.FindMovieHash(request.Name!);
+        var isRequestInCache = await _cacheMovieRepository.FindHash(request.Name!);
         if (isRequestInCache is null)
         {
-            await _cacheRepository.CreateMovieHash(request);
+            await _cacheMovieRepository.CreateHash(request);
         }
 
         await ValidateIfMovieExist(movieRequest.Name!);
@@ -50,10 +51,10 @@ public class MovieService
         return response;
     }
 
-    public async Task<Movie> FindByName(string movieName)
+    public async Task<Movie> Find(string movieName)
     {
         var moviesMatches = new List<Movie>();
-        var movie = await _cacheRepository.FindMovieHash(movieName);
+        var movie = await _cacheMovieRepository.FindHash(movieName);
         if (movie is null)
         {
             moviesMatches = await _movieRepository.FindAsync(movieName);
@@ -62,7 +63,7 @@ public class MovieService
                 throw new MovieNotFoundException(ConstUtil.MovieNotFoundExceptionMessage);
             }
 
-            await _cacheRepository.CreateMovieHash(moviesMatches.Single());
+            await _cacheMovieRepository.CreateHash(moviesMatches.Single());
         }
         else
         {

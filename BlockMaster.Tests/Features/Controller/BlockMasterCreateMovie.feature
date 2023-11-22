@@ -1,12 +1,6 @@
 Feature: Create a movie
 Create movie feature
 
-    Background:
-        Given the data for create a token is
-          | UserId                               | Email         | CustomClaims |
-          | 8a3bbfd4-5bbd-4f8e-8b22-6a066d471bf5 | user@mail.com | admin        |
-          When the token is created
-
     Scenario: Movie created successfully
         Given The details for creating the movie are
           | Name    | Description      | CountryCode | Score | Category |

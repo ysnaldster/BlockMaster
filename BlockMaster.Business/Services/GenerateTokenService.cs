@@ -2,13 +2,18 @@
 using System.Security.Claims;
 using System.Text;
 using BlockMaster.Domain.Request.Identity;
+using BlockMaster.Domain.Services;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BlockMaster.Business.Services;
 
-public class GenerateTokenService
+public class GenerateTokenService : IGenerateTokenService
 {
     private readonly string _apiKey;
+
+    private const string
+        Issuer = "http://localhost:5000/",
+        Audience = "http://localhost:5000/";
 
     public GenerateTokenService(string apiKey)
     {
@@ -42,8 +47,8 @@ public class GenerateTokenService
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.Add(tokenLifeTime),
-            Issuer = "http://localhost:5000/",
-            Audience = "http://localhost:5000/",
+            Issuer = Issuer,
+            Audience = Audience,
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
         };
 
