@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
+
 [EnableCors(ConstUtil.AllowCorsPolicy)]
+[ApiController]
 [Authorize]
 [Route("[controller]")]
 [ApiVersion("1")]
