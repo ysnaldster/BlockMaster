@@ -30,7 +30,6 @@ public class Startup
 
         services.SetAuthenticationStructure(Configuration);
         services.SetAuthorizationStructure();
-
         services.AddControllers()
             .AddNewtonsoftJson(options =>
             {
@@ -48,6 +47,7 @@ public class Startup
         });
         services.ConfigureApiVersioning();
         services.AddHealthChecks();
+        services.ConfigureSwagger();
     }
 
     public void ConfigureContainer(ContainerBuilder builder)
@@ -60,8 +60,11 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            
         }
-
+        
+        app.BuildSwagger();
+        
         app.UseHttpsRedirection();
 
         app.UseRouting();

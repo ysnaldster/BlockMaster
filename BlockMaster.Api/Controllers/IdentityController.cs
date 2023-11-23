@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
-[Route("[controller]")]
 [EnableCors("AllowCorsPolicy")]
+[Route("[controller]")]
 [ApiVersion("1")]
 public class IdentityController : ControllerBase
 {
