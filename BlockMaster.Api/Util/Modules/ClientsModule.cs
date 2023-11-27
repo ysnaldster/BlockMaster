@@ -9,6 +9,13 @@ namespace BlockMaster.Api.Util.Modules;
 [ExcludeFromCodeCoverage]
 public class ClientsModule : Module
 {
+    private readonly IConfiguration _configuration;
+
+    public ClientsModule(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     protected override void Load(ContainerBuilder builder)
     {
         builder
@@ -16,7 +23,7 @@ public class ClientsModule : Module
             .As<IAmazonDynamoDB>()
             .SingleInstance();
         builder
-            .Register((_, _) => new ElastiCacheClient("localhost:6379"))
+            .Register((_, _) => new ElastiCacheClient(_configuration.GetValue<string>("RedisEndpoint")))
             .As<ElastiCacheClient>()
             .SingleInstance();
     }

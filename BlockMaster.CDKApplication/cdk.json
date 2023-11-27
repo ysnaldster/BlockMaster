@@ -13,6 +13,7 @@
       "aws-cn"
     ],
     "ParameterStorePath" : "/BlockMaster",
-    "ApiKey" : "20TNVC9CN3B483NF9CV9NF8C"
+    "ApiKey" : "20TNVC9CN3B483NF9CV9NF8C",
+    "CacheSubnetGroupName" : "BlockMasterSubnetGroup"
   }
 }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlockMaster.Api.Controllers;
 
-
 [EnableCors(ConstUtil.AllowCorsPolicy)]
 [ApiController]
 [Authorize]
@@ -21,6 +20,12 @@ public class MoviesController : ControllerBase
     public MoviesController(IMovieService movieService)
     {
         _movieService = movieService;
+    }
+
+    [HttpGet("ping")]
+    public ActionResult<string> Ping()
+    {
+        return Ok("Pong");
     }
 
     [HttpPost]
