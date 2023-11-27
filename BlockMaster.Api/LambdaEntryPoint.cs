@@ -2,7 +2,6 @@ using Autofac.Extensions.DependencyInjection;
 
 namespace BlockMaster.Api;
 
-/// Handler: BlockMaster.Api::BlockMaster.Api.LambdaEntryPoint::FunctionHandlerAsync
 public class LambdaEntryPoint : Amazon.Lambda.AspNetCoreServer.APIGatewayProxyFunction
 {
     protected override void Init(IWebHostBuilder builder)

@@ -24,7 +24,6 @@ public class RepositoriesModule : Module
                 _configuration.GetValue<string>("DynamoDbMoviesTableName")))
             .As<IMovieRepository>()
             .SingleInstance();
-        //Se debe de generar el parametro de ElastiCache con CDK, y crear la instancia de ElastiCache
         builder
             .Register((context, _) => new CacheMovieRepository(context.Resolve<ElastiCacheClient>()))
             .As<ICacheMovieRepository>()
